@@ -104,6 +104,7 @@ button {
     cursor: pointer;
     transition: scale .1s linear;
     mix-blend-mode: lighten;
+    margin-right: .5rem;
 }
 
 button:hover {
