@@ -17,7 +17,7 @@ const router = createRouter({
     {
       path: '/market',
       name: 'market',
-      component: () => import('../views/marketView.vue')
+      component: () => import('../views/MarketView.vue')
     }
   ]
 })
