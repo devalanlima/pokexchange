@@ -91,5 +91,18 @@ import NavBar from './components/NavBar.vue';
         transform: rotate(0deg) translate(200%) rotate(0deg);
     }
 }
+</style>
 
+<style>
+header {
+    margin: 0 auto;
+
+}
+
+#app {
+    box-sizing: border-box;
+    padding: 0 3rem;
+    max-width: 170rem;
+    margin: 0 auto;
+}
 </style>

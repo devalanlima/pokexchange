@@ -18,8 +18,7 @@
 
 <style scoped>
 nav {
-    width: 90vw;
-    max-width: 170rem;
+    
     font-size: 2rem;
     display: flex;
     gap: 2rem;
