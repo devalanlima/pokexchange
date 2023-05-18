@@ -1,6 +1,5 @@
 <template>
     <div>
-        <input type="text" v-model.trim.lazy="pokemon.name">
         <button @click="execute(`/cards?orderBy=name`)">A - Z</button>
         <button @click="execute(`/cards?orderBy=-name`)">Z - A</button>
         <div v-if="isLoading">
