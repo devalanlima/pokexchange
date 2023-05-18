@@ -1,22 +1,24 @@
 <template>
     <div>
-        <button @click="execute()">Refresh</button>
+        <input type="text" v-model.trim.lazy="pokemon.name">
+        <button @click="execute(`/cards?orderBy=name`)">A - Z</button>
+        <button @click="execute(`/cards?orderBy=-name`)">Z - A</button>
         <div v-if="isLoading">
-            LOADING...
+            <div class="loading" v-for="each in 25" :key="each">
+                <div class="skeleton"></div>
+            </div>
         </div>
-        <div v-else-if="isFinished">
-            <img v-for="pokemon in dataArr"
-            :key="pokemon.id"
-            :src="pokemon.images.small" 
-            :alt="pokemon.name">
-        </div>        
+        <div v-else-if="isFinished" v-once>
+            <img v-for="pokemon in dataArr" :key="pokemon.id" :src="pokemon.images.small" :alt="pokemon.name">
+        </div>
     </div>
 </template>
 
 <script setup>
-import { watch, ref, reactive } from 'vue'
+import { watch, ref, onMounted } from 'vue'
 import axios from 'axios'
 import { useAxios } from '@vueuse/integrations/useAxios'
+import { usePokemonFilters } from '../stores/pokemonFilters';
 
 const instance = axios.create({
     baseURL: 'https://api.pokemontcg.io/v2',
@@ -25,28 +27,9 @@ const instance = axios.create({
     }
 })
 
-const pokemon = reactive({
-    order: 'name', 
-    /* 
-        name: Sort by name in ascending order
-        -name: Sort by name in descending order
-        set.name: Sort by set name in ascending order
-        -set.name: Sort by set name in descending order
-        number: Sort by card number in ascending order
-        -number: Sort by card number in descending order
-        rarity: Sort by rarity in ascending order
-        -rarity: Sort by rarity in descending order
-    */
-    name: '',
-    subtype: '',
-    supertype:'',
-    rarity: '',
-    type1: '|', //search cards of one OR other
-    type2: '|', //if type1 and type2 are diferent types, the search return one AND other
-    minHP: 0,
-    maxHP: 350,  
-})
-const { data, isLoading, isFinished, execute } = useAxios(`/cards?orderBy=${pokemon.order}`, {
+const pokemon = usePokemonFilters()
+
+const { data, isLoading, isFinished, execute } = useAxios({
     params: {
         pageSize: 25,
         q: `
@@ -61,9 +44,13 @@ const { data, isLoading, isFinished, execute } = useAxios(`/cards?orderBy=${poke
     }
 }, instance)
 
+onMounted(() => {
+    execute(`/cards?orderBy=name`)
+})
+
 const dataArr = ref(Array)
-watch(isFinished, ()=>{
-    if (isFinished){
+watch(isFinished, () => {
+    if (isFinished) {
         dataArr.value = data.value.data
     }
 })
@@ -71,8 +58,45 @@ watch(isFinished, ()=>{
 </script>
 
 <style scoped>
-    img{
-        width: 25rem;
-        height: 35rem;
+img {
+    width: 25rem;
+    height: 35rem;
+}
+
+.loading {
+    width: 25rem;
+    height: 35rem;
+    border-radius: 15px;
+    position: relative;
+    background-color: dimgray;
+    overflow: hidden;
+}
+
+.skeleton{
+    box-shadow: 0 0 50px 50px rgba(160, 160, 160, 0.5);
+    animation: skeleton 1s linear infinite;
+    opacity: 0;
+    rotate: -25deg;
+}
+
+@keyframes skeleton {
+    0% {
+        transform: translate(-50px);
+        opacity: 0;
     }
+
+    20% {
+        opacity: 0;
+    }
+
+    50% {
+        transform: translate(20px);
+        opacity: 0.3;
+    }
+
+    100% {
+        transform: translate(300px);
+        opacity: 1;
+    }
+}
 </style>
