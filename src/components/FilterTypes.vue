@@ -1,6 +1,6 @@
 <template>
     <div class="type-wrapper">
-        <div class="input-wrapper" v-for="pokemonType in types" :key="pokemonType" @change="pokemon.setFilterType">
+        <div class="input-wrapper" v-for="pokemonType in types" :key="pokemonType">
             <input type="checkbox" :id="pokemonType" v-model="pokemon.type" :value="pokemonType" />
             <label :for="pokemonType" :class="pokemonType">
                 <img :src="`/${pokemonType}.png`" :alt="pokemonType">

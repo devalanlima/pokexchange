@@ -4,7 +4,6 @@
             <i class="fa-solid fa-magnifying-glass"></i>
         </label>
         <input 
-        class="input" 
         type="text" 
         placeholder="e.g. Pikachu" 
         v-model.trim.lazy="pokemon.name"
@@ -25,7 +24,6 @@ const pokemon = usePokemonFilters()
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 4rem;
     width: 100%;
     position: relative;
     border: .1rem solid var(--color-white);
@@ -38,22 +36,23 @@ const pokemon = usePokemonFilters()
     margin-left: 4rem;
 }
 
-.input {
+input {
     flex-grow: 1;
     box-sizing: border-box;
     outline: none;
     border: none;
     width: 0;
     min-width: 10rem;
-    height: 100%;
+    height: 4rem;
     background-color: var(--color-first--variant);
     padding: 0 1.5rem;
     padding-left: 4rem;
     color: var(--color-white);
-    font-family: var(--font-Noto-Sans);
+    font-family: var(--font-Roboto);
+    font-size: 2rem;
 }
 
-.input:focus {
+input:focus {
     outline: .2rem solid var(--color-third);
 }
 
