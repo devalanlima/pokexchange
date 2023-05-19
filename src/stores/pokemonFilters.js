@@ -15,12 +15,22 @@ export const usePokemonFilters = defineStore({
             -rarity: Sort by rarity in descending order
         */
         name: '',
-        subtype: '',
-        supertype:'',
-        rarity: '',
-        type1: '|', //search cards of one OR other
-        type2: '|', //if type1 and type2 are diferent types, the search return one AND other
+        subtype: '*',
+        supertype:'Pokémon',
+        rarity: '*',
+        type: [],
         minHP: 0,
-        maxHP: 350,   
-    })
+        maxHP: 350, 
+        filterHP: ``,  // hp:[${this.pokemon.minHP} TO ${this.pokemon.maxHP}]
+        selectedType: ''
+    }),
+    getters:{
+        setSelectedType: (state)=>{    
+            let temp = ''
+            state.type.forEach(element => {
+                temp = `types:"${element}" ` + temp
+            });
+            state.selectedType = temp
+        }
+    }
 })
