@@ -1,7 +1,7 @@
 <template>
     <div>
-        <button @click="execute(`/cards?orderBy=name`)">A - Z</button>
-        <button @click="execute(`/cards?orderBy=-name`)">Z - A</button>
+        <button @click="pokemon.order = 'name'">A - Z</button>
+        <button @click="pokemon.order = '-name'">Z - A</button>
         <div v-if="isLoading">
             <div class="loading" v-for="each in 25" :key="each">
                 <div class="skeleton"></div>
@@ -14,10 +14,12 @@
 </template>
 
 <script setup>
-import { watch, ref, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import { useAxios } from '@vueuse/integrations/useAxios'
-import { usePokemonFilters } from '../stores/pokemonFilters';
+import { usePokemonFilters } from '../stores/pokemonFilters'
+
+const pokemon = usePokemonFilters()
 
 const instance = axios.create({
     baseURL: 'https://api.pokemontcg.io/v2',
@@ -26,34 +28,26 @@ const instance = axios.create({
     }
 })
 
-const pokemon = usePokemonFilters()
-
 const { data, isLoading, isFinished, execute } = useAxios({
     params: {
         pageSize: 25,
         q: `
         name:"${pokemon.name}*"
-        subtypes:"${pokemon.subtype}*"
-        supertype:"${pokemon.supertype}*"
-        rarity:"${pokemon.rarity}*"
-        types:"${pokemon.type1}"
-        types:"${pokemon.type2}"
-        hp:[${pokemon.minHP} TO ${pokemon.maxHP}]
+        subtypes:"${pokemon.subtype}"
+        supertype:"${pokemon.supertype}"
+        rarity:"${pokemon.rarity}"
+        ${pokemon.selectedType}
+        ${pokemon.filterHP}
         `
     }
 }, instance)
 
-onMounted(() => {
-    execute(`/cards?orderBy=name`)
-})
-
 const dataArr = ref(Array)
-watch(isFinished, () => {
-    if (isFinished) {
-        dataArr.value = data.value.data
-    }
+onMounted(() => {
+    execute(`/cards?orderBy=${pokemon.order}`)
+    .then(()=>{dataArr.value = data.value.data})
+    .catch((error)=>{console.log(error);})
 })
-
 </script>
 
 <style scoped>
@@ -71,9 +65,9 @@ img {
     overflow: hidden;
 }
 
-.skeleton{
+.skeleton {
     box-shadow: 0 0 50px 50px rgba(160, 160, 160, 0.5);
-    animation: skeleton 1s linear infinite;
+    animation: skeleton .6s linear infinite;
     opacity: 0;
     rotate: -25deg;
 }
