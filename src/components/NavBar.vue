@@ -18,7 +18,7 @@
 
 <style scoped>
 nav {
-    
+
     font-size: 2rem;
     display: flex;
     gap: 2rem;
@@ -58,10 +58,12 @@ nav {
     margin: 0 auto;
     gap: 2rem;
 }
-.links-nav *{
+
+.links-nav * {
     position: relative;
 }
-.links-nav *::after{
+
+.links-nav *::after {
     content: '';
     display: block;
     position: absolute;
@@ -73,10 +75,12 @@ nav {
     transition: width .2s ease-in;
     transform: translateX(-50%);
 }
-.links-nav *:hover::after{
+
+.links-nav *:hover::after {
     width: 100%;
     transform: translateX(-50%);
 }
+
 a {
     color: var(--color-white);
     text-decoration: none;
@@ -89,10 +93,10 @@ a {
 button {
     outline: none;
     border: none;
-    --radius: 1.5rem;
+    --radius: 10rem;
     position: relative;
-    width: 19.1rem;
-    height: 5.1rem;
+    width: 19rem;
+    height: 5rem;
     min-width: 19rem;
     min-height: 5rem;
     display: flex;
@@ -116,8 +120,8 @@ button:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 98%;
-    height: 96%;
+    width: 9.4em;
+    height: 2.4em;
     border-radius: var(--radius);
     position: absolute;
     z-index: 1;
@@ -128,7 +132,6 @@ button:hover {
     font-weight: 300;
 
 }
-
 .btn-style2 {
     box-sizing: border-box;
     display: block;
@@ -138,10 +141,17 @@ button:hover {
     margin: 0;
     padding: 0;
     position: absolute;
-    transition: rotate 2s ease;
 }
-
 .btn-style2:hover {
-    rotate: 720deg;
+    animation: rotate .8s linear infinite;
+}
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
 </style>
