@@ -46,6 +46,7 @@ watch(() => pokemonFilter.supertype, () => {
     pokemonFilter.rarity = '*'
     pokemonFilter.subtype = '*'
     pokemonFilter.filterHP = ''
+    pokemonFilter.isFilterHPOn = false
     if (pokemonFilter.supertype == 'Pokémon') {
         pokemonFilter.minHP = pokemonFilter.rangeMinHP = 30
         pokemonFilter.maxHP = pokemonFilter.rangeMaxHP = 340

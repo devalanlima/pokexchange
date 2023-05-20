@@ -1,7 +1,4 @@
 <template>
-    <div>
-        <button @click="pokemon.order = 'name'">A - Z</button>
-        <button @click="pokemon.order = '-name'">Z - A</button>
         <div v-if="isLoading">
             <div class="loading" v-for="each in 25" :key="each">
                 <div class="skeleton"></div>
@@ -10,7 +7,6 @@
         <div v-else-if="isFinished" v-once>
             <img v-for="pokemon in dataArr" :key="pokemon.id" :src="pokemon.images.small" :alt="pokemon.name">
         </div>
-    </div>
 </template>
 
 <script setup>

@@ -1,14 +1,15 @@
 <template>
     <div class="filter-name">
-        <label for="filter-name" class="icon-wrapper">
-            <i class="fa-solid fa-magnifying-glass"></i>
-        </label>
+        
         <input 
         type="text" 
         placeholder="e.g. Pikachu" 
-        v-model.trim.lazy="pokemon.name"
+        v-model.trim="pokemon.name"
         id="filter-name"
         />
+        <label for="filter-name" class="icon-wrapper">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </label>
     </div>
     
 </template>
@@ -33,7 +34,7 @@ const pokemon = usePokemonFilters()
 .fa-solid {
     cursor: pointer;
     position: absolute;
-    margin-left: 4rem;
+    left: 1rem;
 }
 
 input {
@@ -54,6 +55,10 @@ input {
 
 input:focus {
     outline: .2rem solid var(--color-third);
+}
+
+input:focus ~ label{
+    color: var(--color-third);
 }
 
 .icon-wrapper{

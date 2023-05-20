@@ -4,16 +4,6 @@ export const usePokemonFilters = defineStore({
     id: 'filters',
     state: () =>({
         order: 'name', 
-        /* 
-            name: Sort by name in ascending order
-            -name: Sort by name in descending order
-            set.name: Sort by set name in ascending order
-            -set.name: Sort by set name in descending order
-            number: Sort by card number in ascending order
-            -number: Sort by card number in descending order
-            rarity: Sort by rarity in ascending order
-            -rarity: Sort by rarity in descending order
-        */
         name: '',
         subtype: '*',
         supertype:'Pokémon',
@@ -24,7 +14,7 @@ export const usePokemonFilters = defineStore({
         rangeMaxHP: 340,
         minHP: 30,
         maxHP: 340, 
-        filterHP: '',  // hp:[${this.pokemon.minHP} TO ${this.pokemon.maxHP}]
+        filterHP: '',
         selectedType: ''
     }),
     getters:{
