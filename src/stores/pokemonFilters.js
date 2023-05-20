@@ -31,6 +31,12 @@ export const usePokemonFilters = defineStore({
                 temp = `types:"${element}" ` + temp
             });
             state.selectedType = temp
+        },
+        selectedSupertype: (state)=>{
+            if(state.supertype !== 'Pokémon'){
+                state.type = []
+                state.selectedType = ''
+            }
         }
     }
 })
