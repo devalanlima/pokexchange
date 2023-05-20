@@ -19,9 +19,12 @@ export const usePokemonFilters = defineStore({
         supertype:'Pokémon',
         rarity: '*',
         type: [],
-        minHP: 0,
-        maxHP: 350, 
-        filterHP: ``,  // hp:[${this.pokemon.minHP} TO ${this.pokemon.maxHP}]
+        isFilterHPOn: false,
+        rangeMinHP: 30,
+        rangeMaxHP: 340,
+        minHP: 30,
+        maxHP: 340, 
+        filterHP: '',  // hp:[${this.pokemon.minHP} TO ${this.pokemon.maxHP}]
         selectedType: ''
     }),
     getters:{
@@ -37,6 +40,13 @@ export const usePokemonFilters = defineStore({
                 state.type = []
                 state.selectedType = ''
             }
-        }
+        },
+        setSelectedHP: (state) =>{
+            if(state.isFilterHPOn){
+            state.filterHP = `hp:[${state.minHP} TO ${state.maxHP}]`   
+            } else {
+                state.filterHP = ''
+            }
+        },
     }
 })
