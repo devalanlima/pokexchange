@@ -43,7 +43,7 @@
 </template>
 
 <script setup>
-import { usePokemonFilters } from '../stores/pokemonFilters'
+import { usePokemonFilters } from '../stores/StorePokemonFilters'
 const pokemon = usePokemonFilters()
 
 const rarities = {

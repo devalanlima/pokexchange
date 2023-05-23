@@ -1,4 +1,5 @@
 <template>
+    <Transition name="fade">
         <div v-if="isLoading">
             <div class="loading" v-for="each in 25" :key="each">
                 <div class="skeleton"></div>
@@ -7,15 +8,18 @@
         <div v-else-if="isFinished" v-once>
             <img v-for="pokemon in dataArr" :key="pokemon.id" :src="pokemon.images.small" :alt="pokemon.name">
         </div>
+    </Transition>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import { useAxios } from '@vueuse/integrations/useAxios'
-import { usePokemonFilters } from '../stores/pokemonFilters'
+import { usePokemonFilters } from '../stores/StorePokemonFilters'
+import { useOffsetPagination } from '../stores/StoreOffsetPagination'
 
 const pokemon = usePokemonFilters()
+const pagination = useOffsetPagination()
 
 const instance = axios.create({
     baseURL: 'https://api.pokemontcg.io/v2',
@@ -26,7 +30,8 @@ const instance = axios.create({
 
 const { data, isLoading, isFinished, execute } = useAxios({
     params: {
-        pageSize: 25,
+        pageSize: `${pagination.pageSize}`,
+        page: `${pagination.currentPage}`,
         q: `
         name:"${pokemon.name}*"
         subtypes:"${pokemon.subtype}"
@@ -41,7 +46,10 @@ const { data, isLoading, isFinished, execute } = useAxios({
 const dataArr = ref(Array)
 onMounted(() => {
     execute(`/cards?orderBy=${pokemon.order}`)
-    .then(()=>{dataArr.value = data.value.data})
+    .then(()=>{
+        dataArr.value = data.value.data
+        pagination.totalPages = Math.ceil(data.value.totalCount / pagination.pageSize)
+    })
     .catch((error)=>{console.log(error);})
 })
 </script>
