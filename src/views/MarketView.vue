@@ -12,26 +12,21 @@
         <div class="market-itens">
             <div class="functions-wrapper">
                 <div class="btn-wrapper">
-                    <button @click="pagination.pageSize = 25" >25</button>
-                    <button @click="pagination.pageSize = 50" >50</button>
-                    <button @click="pagination.pageSize = 100" >100</button>
+                    <button @click="pagination.pageSize = 25">25</button>
+                    <button @click="pagination.pageSize = 50">50</button>
+                    <button @click="pagination.pageSize = 100">100</button>
                     <button @click="pokemonFilter.order = 'name'">A - Z</button>
                     <button @click="pokemonFilter.order = '-name'">Z - A</button>
                 </div>
-                <OffsetPagination/>
+                <OffsetPagination />
             </div>
-            <SearchCards 
-            :key="renderKey"
-            :pageSize="pagination.pageSize"
-            :currentPage="pagination.currentPage"
-            :name="pokemonFilter.name"
-            :subtype="pokemonFilter.subtype"
-            :supertype="pokemonFilter.supertype"
-            :rarity="pokemonFilter.rarity"
-            :type="pokemonFilter.selectedType"
-            :hp="pokemonFilter.filterHP"
-            />
-            <OffsetPagination/>
+            <SearchCards :key="renderKey" :order="pokemonFilter.order" :pageSize="pagination.pageSize"
+                :currentPage="pagination.currentPage" :name="pokemonFilter.name" :subtype="pokemonFilter.subtype"
+                :supertype="pokemonFilter.supertype" :rarity="pokemonFilter.rarity" :type="pokemonFilter.selectedType"
+                :hp="pokemonFilter.filterHP" />
+            <div class="functions-wrapper">
+                <OffsetPagination />
+            </div>
         </div>
     </div>
 </template>
@@ -58,10 +53,10 @@ const renderKey = ref(true)
 let timeoutId
 
 watch([
-    pokemonFilter, 
-    ()=>{pagination.currentPage},
-    ()=>{pagination.pageSize}
-    ], () => {
+    pokemonFilter,
+    () => { pagination.currentPage },
+    () => { pagination.pageSize }
+], () => {
     clearTimeout(timeoutId)
     timeoutId = setTimeout(() => {
         renderKey.value = !renderKey.value;
@@ -86,7 +81,7 @@ watch(() => pokemonFilter.supertype, () => {
     }
 })
 
-watch([pokemonFilter,()=>{pagination.pageSize}], ()=>{
+watch([pokemonFilter, () => { pagination.pageSize }], () => {
     pagination.currentPage = 1
 })
 
@@ -112,30 +107,29 @@ watch([pokemonFilter,()=>{pagination.pageSize}], ()=>{
     gap: 3rem;
 }
 
-.functions-wrapper{
+.functions-wrapper {
     display: flex;
     position: relative;
     align-items: center;
 }
 
-.btn-wrapper{
+.btn-wrapper {
     position: absolute;
     right: 0;
 }
-</style>
 
-<style>
 .market-itens {
-    border: 2px dotted red;
-    width: 100%;
-}
-
-.market-itens * {
+    box-sizing: border-box;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    gap: .58rem 0;
-    margin: .58rem;
+    flex-direction: column;
+    width: 100%;
+    gap: 4rem;
 }
 
+.market-itens *:not(.functions-wrapper *) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    gap: 4rem;
+    place-items: center;
+}
 </style>

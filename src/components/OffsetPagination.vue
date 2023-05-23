@@ -51,11 +51,9 @@ const updateInputValue = () => {
 <style scoped>
 .pagination-wrapper {
     display: flex;
-    width: 30rem;
-    margin: 0 auto;
     align-items: center;
-    justify-content: center;
     user-select: none;
+    gap: 1.2rem;
 }
 
 input[type=number]::-webkit-inner-spin-button,
@@ -98,6 +96,7 @@ p {
     font-family: var(--font-Roboto);
     font-size: 2rem;
     color: var(--color-third);
+    gap: 1.2rem;
 }
 
 button {

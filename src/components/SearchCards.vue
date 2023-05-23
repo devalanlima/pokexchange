@@ -1,14 +1,12 @@
 <template>
-    <Transition name="fade">
-        <div v-if="isLoading">
-            <div class="loading" v-for="each in 25" :key="each">
-                <div class="skeleton"></div>
-            </div>
+    <div v-if="isLoading">
+        <div class="loading" v-for="each in 25" :key="each">
+            <div class="skeleton"></div>
         </div>
-        <div v-else-if="isFinished" v-once>
-            <img v-for="pokemon in dataArr" :key="pokemon.id" :src="pokemon.images.small" :alt="pokemon.name">
-        </div>
-    </Transition>
+    </div>
+    <div v-else-if="isFinished" v-once class="img-wrapper">
+        <img v-for="pokemon in dataArr" :key="pokemon.id" :src="pokemon.images.small" :alt="pokemon.name">
+    </div>
 </template>
 
 <script setup>
@@ -28,14 +26,15 @@ const instance = axios.create({
 })
 
 const props = defineProps({
-    pageSize: {type: Number, default:1, required: true},
-    currentPage: {type: Number, default:1, required: true},
-    name: {type: String, default:'', required: true},
-    subtype: {type: String, default:'', required: true},
-    supertype: {type: String, default:'', required: true},
-    rarity: {type: String, default:'', required: true},
-    type: {type: String, default:'1', required: true},
-    hp: {type: String, default:'1', required: true}, 
+    order: { type: String, default: 'name' },
+    pageSize: { type: Number, default: 1, required: true },
+    currentPage: { type: Number, default: 1, required: true },
+    name: { type: String, default: '', required: true },
+    subtype: { type: String, default: '', required: true },
+    supertype: { type: String, default: '', required: true },
+    rarity: { type: String, default: '', required: true },
+    type: { type: String, default: '', required: true },
+    hp: { type: String, default: '', required: true },
 })
 
 const { data, isLoading, isFinished, execute } = useAxios({
@@ -55,19 +54,20 @@ const { data, isLoading, isFinished, execute } = useAxios({
 
 const dataArr = ref(Array)
 onMounted(() => {
-    execute(`/cards?orderBy=name`)
-    .then(()=>{
-        dataArr.value = data.value.data
-        pagination.totalPages = Math.ceil(data.value.totalCount / props.pageSize)
-    })
-    .catch((error)=>{console.log(error);})
+    execute(`/cards?orderBy=${props.order}`)
+        .then(() => {
+            dataArr.value = data.value.data
+            pagination.totalPages = Math.ceil(data.value.totalCount / props.pageSize)
+        })
+        .catch((error) => { console.log(error); })
 })
 </script>
 
 <style scoped>
+
 img {
-    width: 25rem;
-    height: 35rem;
+    width: 26.67rem;
+    height: 37rem; 
 }
 
 .loading {
