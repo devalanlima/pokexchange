@@ -64,10 +64,9 @@ onMounted(() => {
 </script>
 
 <style scoped>
-
 img {
     width: 26.67rem;
-    height: 37rem; 
+    height: 37rem;
 }
 
 .loading {
@@ -75,35 +74,26 @@ img {
     height: 35rem;
     border-radius: 15px;
     position: relative;
-    background-color: dimgray;
+    background: rgb(45, 46, 58);
     overflow: hidden;
 }
 
-.skeleton {
-    box-shadow: 0 0 50px 50px rgba(160, 160, 160, 0.5);
-    animation: skeleton .6s linear infinite;
-    opacity: 0;
-    rotate: -25deg;
+.skeleton{
+    width: 100%;
+    height: 160%;
+    background: linear-gradient(to right, transparent 30%, rgba(219, 219, 219, 0.158) 50%, transparent 70%);
+    rotate: 45deg;
+    background-position: center;
+    animation: loading infinite .8s ease-in-out;
 }
 
-@keyframes skeleton {
+@keyframes loading {
     0% {
-        transform: translate(-50px);
-        opacity: 0;
-    }
-
-    20% {
-        opacity: 0;
-    }
-
-    50% {
-        transform: translate(20px);
-        opacity: 0.3;
+        transform: translateX(-300px);
     }
 
     100% {
-        transform: translate(300px);
-        opacity: 1;
+        transform: translateX(300px);
     }
 }
 </style>
