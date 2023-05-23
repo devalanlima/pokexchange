@@ -15,10 +15,9 @@
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import { useAxios } from '@vueuse/integrations/useAxios'
-import { usePokemonFilters } from '../stores/StorePokemonFilters'
+
 import { useOffsetPagination } from '../stores/StoreOffsetPagination'
 
-const pokemon = usePokemonFilters()
 const pagination = useOffsetPagination()
 
 const instance = axios.create({
@@ -28,27 +27,38 @@ const instance = axios.create({
     }
 })
 
+const props = defineProps({
+    pageSize: {type: Number, default:1, required: true},
+    currentPage: {type: Number, default:1, required: true},
+    name: {type: String, default:'', required: true},
+    subtype: {type: String, default:'', required: true},
+    supertype: {type: String, default:'', required: true},
+    rarity: {type: String, default:'', required: true},
+    type: {type: String, default:'1', required: true},
+    hp: {type: String, default:'1', required: true}, 
+})
+
 const { data, isLoading, isFinished, execute } = useAxios({
     params: {
-        pageSize: `${pagination.pageSize}`,
-        page: `${pagination.currentPage}`,
+        pageSize: `${props.pageSize}`,
+        page: `${props.currentPage}`,
         q: `
-        name:"${pokemon.name}*"
-        subtypes:"${pokemon.subtype}"
-        supertype:"${pokemon.supertype}"
-        rarity:"${pokemon.rarity}"
-        ${pokemon.selectedType}
-        ${pokemon.filterHP}
+        name:"${props.name}*"
+        subtypes:"${props.subtype}"
+        supertype:"${props.supertype}"
+        rarity:"${props.rarity}"
+        ${props.type}
+        ${props.hp}
         `
     }
 }, instance)
 
 const dataArr = ref(Array)
 onMounted(() => {
-    execute(`/cards?orderBy=${pokemon.order}`)
+    execute(`/cards?orderBy=name`)
     .then(()=>{
         dataArr.value = data.value.data
-        pagination.totalPages = Math.ceil(data.value.totalCount / pagination.pageSize)
+        pagination.totalPages = Math.ceil(data.value.totalCount / props.pageSize)
     })
     .catch((error)=>{console.log(error);})
 })
