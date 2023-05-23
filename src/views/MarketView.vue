@@ -20,7 +20,17 @@
                 </div>
                 <OffsetPagination/>
             </div>
-            <SearchCards :key="renderKey" />
+            <SearchCards 
+            :key="renderKey"
+            :pageSize="pagination.pageSize"
+            :currentPage="pagination.currentPage"
+            :name="pokemonFilter.name"
+            :subtype="pokemonFilter.subtype"
+            :supertype="pokemonFilter.supertype"
+            :rarity="pokemonFilter.rarity"
+            :type="pokemonFilter.selectedType"
+            :hp="pokemonFilter.filterHP"
+            />
             <OffsetPagination/>
         </div>
     </div>
