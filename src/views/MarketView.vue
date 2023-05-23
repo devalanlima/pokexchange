@@ -76,7 +76,7 @@ watch(() => pokemonFilter.supertype, () => {
     }
 })
 
-watch(pokemonFilter, ()=>{
+watch([pokemonFilter,()=>{pagination.pageSize}], ()=>{
     pagination.currentPage = 1
 })
 
