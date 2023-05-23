@@ -1,11 +1,11 @@
 <template>
     <div v-if="isLoading">
-        <div class="loading" v-for="each in 24" :key="each">
+        <div class="loading" v-for="each in props.pageSize" :key="each">
             <div class="skeleton"></div>
         </div>
     </div>
-    <div v-else-if="isFinished" v-once class="img-wrapper">
-        <img v-for="pokemon in dataArr" :key="pokemon.id" :src="pokemon.images.small" :alt="pokemon.name">
+    <div v-else-if="isFinished" v-once>
+        <img v-for="pokemon in dataArr" :key="pokemon.id" :src="pokemon.images[`${props.imageSize}`]" :alt="pokemon.name">
     </div>
 </template>
 
@@ -35,6 +35,7 @@ const props = defineProps({
     rarity: { type: String, default: '', required: true },
     type: { type: String, default: '', required: true },
     hp: { type: String, default: '', required: true },
+    imageSize: { type: String, default: 'small'}
 })
 
 const { data, isLoading, isFinished, execute } = useAxios({
@@ -64,14 +65,16 @@ onMounted(() => {
 </script>
 
 <style scoped>
+
 img {
+    object-fit: cover;
     width: 26.67rem;
     height: 37rem;
 }
 
 .loading {
-    width: 25rem;
-    height: 35rem;
+    width: 26.67rem;
+    height: 37rem;
     border-radius: 15px;
     position: relative;
     background: rgb(45, 46, 58);
