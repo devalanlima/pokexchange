@@ -1,5 +1,5 @@
 <template>
-    <div class="type-wrapper">
+    <div class="type-wrapper" @change="pokemon.setSelectedType" :key="pokemon.supertype">
         <div class="input-wrapper" v-for="pokemonType in types" :key="pokemonType">
             <input type="checkbox" :id="pokemonType" v-model="pokemon.type" :value="pokemonType" />
             <label :for="pokemonType" :class="pokemonType">
@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import { usePokemonFilters } from '../stores/pokemonFilters';
+import { usePokemonFilters } from '../stores/StorePokemonFilters';
 const pokemon = usePokemonFilters()
 const types = [
     "Colorless",
