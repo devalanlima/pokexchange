@@ -1,6 +1,6 @@
 <template>
     <div v-if="isLoading">
-        <div class="loading" v-for="each in 25" :key="each">
+        <div class="loading" v-for="each in 24" :key="each">
             <div class="skeleton"></div>
         </div>
     </div>

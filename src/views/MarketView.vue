@@ -12,8 +12,8 @@
         <div class="market-itens">
             <div class="functions-wrapper">
                 <div class="btn-wrapper">
-                    <button @click="pagination.pageSize = 25">25</button>
-                    <button @click="pagination.pageSize = 50">50</button>
+                    <button @click="pagination.pageSize = 24">24</button>
+                    <button @click="pagination.pageSize = 52">52</button>
                     <button @click="pagination.pageSize = 100">100</button>
                     <button @click="pokemonFilter.order = 'name'">A - Z</button>
                     <button @click="pokemonFilter.order = '-name'">Z - A</button>
