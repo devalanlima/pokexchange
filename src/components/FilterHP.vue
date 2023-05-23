@@ -1,5 +1,5 @@
 <template>
-    <div :class="['slider-wrapper', {'slider-wrapper-checked': pokemon.isFilterHPOn}]">
+    <div :class="['slider-wrapper', {'slider-wrapper-checked': pokemon.isFilterHPOn}]" @change="pokemon.setFilterHP">
         <div class="toggle-HP">
             <input type="checkbox" id="toggle" :checked="pokemon.isFilterHPOn" v-model="pokemon.isFilterHPOn">
             <label v-if="pokemon.isFilterHPOn" for="toggle">HP ON</label>
@@ -10,17 +10,24 @@
             <p class="max-hp">{{ pokemon.maxHP }} HP</p>
         </div>
         <div class="slide-container" v-if="pokemon.isFilterHPOn">
-            <input type="range" :min="pokemon.rangeMinHP" :max="pokemon.rangeMaxHP" v-model="pokemon.minHP" step="10"
-                class="slider" id="myRange" />
+            <input 
+            type="range" 
+            :min="pokemon.rangeMinHP" 
+            :max="pokemon.rangeMaxHP" 
+            v-model="pokemon.minHP" 
+            step="10"
+            class="slider" 
+            id="myRange" 
+            />
 
             <input type="range" :min="pokemon.rangeMinHP" :max="pokemon.rangeMaxHP" v-model="pokemon.maxHP" step="10"
-                class="slider slider2" id="myRange" />
+                class="slider slider2" id="myRange"/>
         </div>
     </div>
 </template>
 
 <script setup>
-import { usePokemonFilters } from '../stores/pokemonFilters';
+import { usePokemonFilters } from '../stores/StorePokemonFilters';
 import { watch } from 'vue'
 const pokemon = usePokemonFilters()
 
