@@ -1,27 +1,9 @@
 <template>
-    <div class="cards-wrapper">
-        <SearchCards 
-            :pageSize="10" 
-            :currentPage="1" 
-            :name="''"
-            :subtype="'*'" 
-            :supertype="'Pokémon'" 
-            :rarity="'*'"
-            :type="''" 
-            :hp="''" />
+    <div>
+        <LatestCards/>
     </div>
 </template>
 
 <script setup>
-import SearchCards from "../components/SearchCards.vue";
+import LatestCards from '../components/LatestCards.vue';
 </script>
-
-<style scoped>
-    .cards-wrapper *{
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-        gap: 3rem;
-        
-    }
-</style>
