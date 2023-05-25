@@ -91,9 +91,8 @@ watch([pokemonFilter, () => { pagination.pageSize }], () => {
 .market-wrapper {
     display: grid;
     grid-template-columns: 1fr 4.8fr;
-    gap: 2rem;
     width: 100%;
-    position: relative;
+    margin-top: 5rem;
 }
 
 .search-filter {
@@ -102,6 +101,7 @@ watch([pokemonFilter, () => { pagination.pageSize }], () => {
     max-height: 80vh;
     position: sticky;
     top: 10rem;
+    margin-top: 2rem;
     display: flex;
     flex-direction: column;
     gap: 3rem;
@@ -123,7 +123,6 @@ watch([pokemonFilter, () => { pagination.pageSize }], () => {
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: 4rem;
 }
 
 .market-itens *:not(.functions-wrapper *) {
