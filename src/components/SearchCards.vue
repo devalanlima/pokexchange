@@ -7,10 +7,12 @@
         </div>
 
         <div v-else-if="isFinished" v-once>
-            <ParallaxEffect class="parallax-size" v-for="pokemon in dataArr" :key="pokemon.id" >
-                <img :src="pokemon.images[`${props.imageSize}`]"
-                    :alt="pokemon.name">
-            </ParallaxEffect>
+            <div class="parallax-size" v-for="pokemon in dataArr" :key="pokemon.id" >
+                <ParallaxEffect>
+                    <img :src="pokemon.images[`${props.imageSize}`]"
+                        :alt="pokemon.name">
+                </ParallaxEffect>
+            </div>
         </div>
 </template>
 
@@ -73,8 +75,9 @@ onMounted(() => {
 <style scoped>
 img {
     object-fit: cover;
-    width: 26.67rem;
-    height: 37rem;
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
 }
 
 .loading {

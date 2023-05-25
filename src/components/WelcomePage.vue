@@ -28,42 +28,48 @@
             </div>
         </div>
         <div class="three-cards">
-            <SearchCards
-                :order="'number'"
-                :pageSize="1"
-                :currentPage="2"
-                :name="'char'"
-                :subtype="'MEGA'"
-                :supertype="'*'"
-                :rarity="'*'"
-                :type="''"
-                :hp="''" 
-                :imageSize="'large'"
-            />
-            <SearchCards
-                :order="'number'"
-                :pageSize="1"
-                :currentPage="1"
-                :name="'blastoise'"
-                :subtype="'MEGA'"
-                :supertype="'*'"
-                :rarity="'*'"
-                :type="''"
-                :hp="''" 
-                :imageSize="'large'"
-            />
-            <SearchCards
-                :order="'number'"
-                :pageSize="1"
-                :currentPage="1"
-                :name="'ven'"
-                :subtype="'MEGA'"
-                :supertype="'*'"
-                :rarity="'*'"
-                :type="''"
-                :hp="''" 
-                :imageSize="'large'"
-            />
+            <div class="card1">
+                <SearchCards
+                    :order="'number'"
+                    :pageSize="1"
+                    :currentPage="2"
+                    :name="'char'"
+                    :subtype="'MEGA'"
+                    :supertype="'*'"
+                    :rarity="'*'"
+                    :type="''"
+                    :hp="''"
+                    :imageSize="'large'"
+                />
+            </div>
+            <div class="card2">
+                <SearchCards
+                    :order="'number'"
+                    :pageSize="1"
+                    :currentPage="1"
+                    :name="'blastoise'"
+                    :subtype="'MEGA'"
+                    :supertype="'*'"
+                    :rarity="'*'"
+                    :type="''"
+                    :hp="''"
+                    :imageSize="'large'"
+                />
+            </div>
+            <div class="card3">
+                <SearchCards
+                    :order="'number'"
+                    :pageSize="1"
+                    :currentPage="1"
+                    :name="'ven'"
+                    :subtype="'MEGA'"
+                    :supertype="'*'"
+                    :rarity="'*'"
+                    :type="''"
+                    :hp="''"
+                    :imageSize="'large'"
+                />
+            </div>
         </div>
     </article>
 </template>
@@ -80,7 +86,7 @@ article {
     justify-content: center;
     margin: 10rem auto 15rem;
     flex-wrap: wrap;
-    position: relative;
+    position: relative; 
     gap: 4rem;
     padding: 0 10rem;
 }
@@ -90,7 +96,7 @@ h2 {
     font-weight: 700;
     font-size: 6rem;
     width: 60rem;
-    line-height: 8rem;
+    line-height: 7rem;
 }
 
 .pokemonString {
@@ -108,6 +114,7 @@ h2 {
     text-align: justify;
     font-size: 2.5rem;
     color: var(--color-white);
+    line-height: 3.5rem;
 }
 
 .datas {
@@ -133,47 +140,39 @@ h2 {
     font-size: 2.5rem;
     font-weight: 200;
 }
-
 .three-cards{
-    box-sizing: border-box;
+    width: 60rem;
+    height: 55rem;
     position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    right: 0;
-    width: 69rem;
-    height: 50rem;
-    
+    right: 10rem;
 }
-
-</style>
-
-<style>
-.three-cards .loading{
-    height: 43rem;
-    width: 30rem;
-}
-.three-cards img{
-    height: 43rem;
-    width: 30rem;
-}
-.three-cards :nth-last-child(3){
+.card1, .card2, .card3{
     position: absolute;
-    left: 0;
-    top: 2rem;
+}
+.card1{
+    top: 3rem;
+    left: 0rem;
+    rotate: -10deg;
     z-index: 2;
-    rotate: -13deg;
 }
-.three-cards :nth-child(2){
-    position: absolute;
-    left: 12rem;
+.card2{
+    left: 10rem;
     top: 0;
+    rotate: 0deg;
     z-index: 1;
+    pointer-events: none;
 }
-.three-cards :nth-child(3){
-    position: absolute;
-    left: 24rem;
-    rotate: 13deg;
-    top: 2rem;
+
+.card3{
+    top: 1rem;
+    left: 20rem;
+    rotate: 10deg;
+    pointer-events: none;
+}
+</style>
+<style>
+.card1 .parallax-size, .card2 .parallax-size, .card3 .parallax-size {
+    width: 32.1rem;
+    height: 45rem;
 }
 </style>
