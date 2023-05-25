@@ -7,12 +7,8 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 
-const elementWidth = ref(null)
-const elementHeight = ref(null)
-const elementOffsetTop = ref(null)
-const elementOffsetLeft = ref(null)
 const centerX = ref(null)
 const centerY = ref(null)
 const cordsY = ref(null)
@@ -20,19 +16,13 @@ const cordsX = ref(null)
 const $container = ref(null)
 const $wrapper = ref(null)
 
-onMounted(() => {
-    
-})
 
 const mouseEffect = (event) => {
-    elementHeight.value = $wrapper.value.offsetHeight
-    elementWidth.value = $wrapper.value.offsetWidth
-    elementOffsetTop.value = $wrapper.value.offsetTop
-    elementOffsetLeft.value = $wrapper.value.offsetLeft
-    centerX.value = elementOffsetLeft.value + (elementWidth.value / 2)
-    centerY.value = elementOffsetTop.value + (elementHeight.value / 2)
-    cordsY.value = ((centerX.value - event.pageX) * -1) / elementWidth.value
-    cordsX.value = (centerY.value - event.pageY) / elementHeight.value
+    const element = $wrapper.value.getBoundingClientRect()
+    centerX.value = element.x + (element.width / 2)
+    centerY.value = element.y + (element.height / 2)
+    cordsY.value = ((centerX.value - event.clientX) * -1) / element.width
+    cordsX.value = (centerY.value - event.clientY) / element.height
     $container.value.style.transform = `rotateX(${cordsX.value * 40}deg) rotateY(${cordsY.value * 30}deg)`
 }
 
@@ -50,8 +40,12 @@ const resetPosition = () => {
     width: 100%;
     height: 100%;
     perspective: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
-    padding: 3rem;
+    padding: 2.5rem;
+    user-select: none;
 }
 
 .container {
@@ -59,6 +53,10 @@ const resetPosition = () => {
     height: 100%;
     transition: .45s cubic-bezier(.2, .49, .32, .99);
     transform-style: preserve-3d;
-    position: relative;
+    border-radius: 1rem;
+    box-shadow: 
+    .3rem .3rem .5rem rgba(11, 7, 34, 0.527),
+    .9rem .9rem 2rem rgba(11, 7, 34, 0.527);
 }
+
 </style>
