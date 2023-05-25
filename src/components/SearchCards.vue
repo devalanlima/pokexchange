@@ -1,18 +1,24 @@
 <template>
-    <div v-if="isLoading">
-        <div class="loading" v-for="each in props.pageSize" :key="each">
-            <div class="skeleton"></div>
+    
+        <div v-if="isLoading">
+            <div class="loading" v-for="each in props.pageSize" :key="each">
+                <div class="skeleton"></div>
+            </div>
         </div>
-    </div>
-    <div v-else-if="isFinished" v-once>
-        <img v-for="pokemon in dataArr" :key="pokemon.id" :src="pokemon.images[`${props.imageSize}`]" :alt="pokemon.name">
-    </div>
+
+        <div v-else-if="isFinished" v-once>
+            <ParallaxEffect class="parallax-size" v-for="pokemon in dataArr" :key="pokemon.id" >
+                <img :src="pokemon.images[`${props.imageSize}`]"
+                    :alt="pokemon.name">
+            </ParallaxEffect>
+        </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import { useAxios } from '@vueuse/integrations/useAxios'
+import ParallaxEffect from './ParallaxEffect.vue'
 
 import { useOffsetPagination } from '../stores/StoreOffsetPagination'
 
@@ -35,7 +41,7 @@ const props = defineProps({
     rarity: { type: String, default: '', required: true },
     type: { type: String, default: '', required: true },
     hp: { type: String, default: '', required: true },
-    imageSize: { type: String, default: 'small'}
+    imageSize: { type: String, default: 'small' }
 })
 
 const { data, isLoading, isFinished, execute } = useAxios({
@@ -65,7 +71,6 @@ onMounted(() => {
 </script>
 
 <style scoped>
-
 img {
     object-fit: cover;
     width: 26.67rem;
@@ -81,7 +86,7 @@ img {
     overflow: hidden;
 }
 
-.skeleton{
+.skeleton {
     width: 100%;
     height: 160%;
     background: linear-gradient(to right, transparent 30%, rgba(219, 219, 219, 0.158) 50%, transparent 70%);
@@ -98,5 +103,10 @@ img {
     100% {
         transform: translateX(300px);
     }
+}
+
+.parallax-size{
+    width: 26.67rem;
+    height: 37rem;
 }
 </style>
