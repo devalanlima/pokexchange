@@ -7,6 +7,7 @@
             <FilterSubtype />
             <FilterTypes v-if="pokemonFilter.supertype == 'Pokémon'" :key="renderKey" />
             <FilterHP v-if="pokemonFilter.supertype !== 'Energy'" :key="renderKey" />
+            <ResetAllFilters/>
         </div>
 
         <div class="market-itens">
@@ -40,6 +41,7 @@ import FilterSubtype from "@/components/FilterSubtype.vue"
 import FilterTypes from "@/components/FilterTypes.vue"
 import FilterHP from "@/components/FilterHP.vue"
 import OffsetPagination from "@/components/OffsetPagination.vue"
+import ResetAllFilters from "@/components/ResetAllFilters.vue"
 
 import { watch, ref } from 'vue'
 import { usePokemonFilters } from '../stores/StorePokemonFilters';
@@ -64,13 +66,7 @@ watch([
 })
 
 watch(() => pokemonFilter.supertype, () => {
-    pokemonFilter.rarity = '*'
-    pokemonFilter.subtype = '*'
-    pokemonFilter.type = []
-    pokemonFilter.selectedType = ''
-    pokemonFilter.filterHP = ''
-    pokemonFilter.isFilterHPOn = false
-    pagination.currentPage = 1
+    pokemonFilter.resetFilters()
     if (pokemonFilter.supertype == 'Pokémon') {
         pokemonFilter.minHP = pokemonFilter.rangeMinHP = 30
         pokemonFilter.maxHP = pokemonFilter.rangeMaxHP = 340
