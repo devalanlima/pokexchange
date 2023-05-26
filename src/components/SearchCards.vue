@@ -8,7 +8,7 @@
 
         <div v-else-if="isFinished" v-once>
             <div class="parallax-size" v-for="pokemon in dataArr" :key="pokemon.id" >
-                <ParallaxEffect>
+                <ParallaxEffect :rarity-card="pokemon.rarity">
                     <img :src="pokemon.images[`${props.imageSize}`]"
                         :alt="pokemon.name">
                 </ParallaxEffect>
