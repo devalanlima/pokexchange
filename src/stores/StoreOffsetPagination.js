@@ -4,7 +4,7 @@ export const useOffsetPagination = defineStore({
     id: 'pagination',
     state: () =>({
         totalPages: 535,
-        pageSize: 24,
+        pageSize: 25,
         currentPage: 1,
     }),
     actions:{
