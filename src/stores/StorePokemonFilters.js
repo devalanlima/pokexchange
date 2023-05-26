@@ -39,6 +39,20 @@ export const usePokemonFilters = defineStore({
         },
         setSelectedType() {
             this.selectedType = this.getSelectedType
+        },
+        resetFilters() {
+            this.order= 'name',
+            this.name= '',
+            this.subtype= '*',
+            this.rarity= '*',
+            this.type= [],
+            this.isFilterHPOn= false,
+            this.rangeMinHP= 30,
+            this.rangeMaxHP= 340,
+            this.minHP= 30,
+            this.maxHP= 340,
+            this.filterHP= '',
+            this.selectedType= ''
         }
     }
 });
