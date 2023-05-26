@@ -69,8 +69,8 @@ const cardRarity = ref({
     position: 'absolute',
     left: '50%',
     top: '50%',
-    width: '15rem',
-    height: '20rem',
+    width: '15em',
+    height: '20em',
     borderRadius: '50%',
     background: 'white',
     filter: 'blur(4rem)',
@@ -151,6 +151,7 @@ switch (true) {
 
 <style scoped>
 .container-wrapper {
+    box-sizing: border-box;
     width: 100%;
     height: 100%;
     perspective: 500px;

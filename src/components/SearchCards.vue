@@ -6,8 +6,8 @@
             </div>
         </div>
 
-        <div v-else-if="isFinished" v-once>
-            <div class="parallax-size" v-for="pokemon in dataArr" :key="pokemon.id" >
+        <div v-else-if="isFinished">
+            <div v-for="pokemon in dataArr" :key="pokemon.id" >
                 <ParallaxEffect :rarity-card="pokemon.rarity">
                     <img :src="pokemon.images[`${props.imageSize}`]"
                         :alt="pokemon.name">
@@ -81,8 +81,10 @@ img {
 }
 
 .loading {
-    width: 26.67rem;
-    height: 37rem;
+    box-sizing: border-box;
+    width: 21.7rem;
+    height: 30.3rem;
+    margin: 3rem;
     border-radius: 15px;
     position: relative;
     background: rgb(45, 46, 58);
@@ -108,8 +110,4 @@ img {
     }
 }
 
-.parallax-size{
-    width: 26.67rem;
-    height: 37rem;
-}
 </style>

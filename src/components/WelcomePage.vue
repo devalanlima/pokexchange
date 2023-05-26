@@ -171,8 +171,13 @@ h2 {
 }
 </style>
 <style>
-.card1 .parallax-size, .card2 .parallax-size, .card3 .parallax-size {
+.card1 img, .card2 img, .card3 img {
     width: 32.1rem;
     height: 45rem;
+}
+
+.card1 .loading, .card1 .loading, .card3 .loading  {
+    width: 27.1rem;
+    height: 40rem;
 }
 </style>

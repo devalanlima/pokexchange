@@ -128,7 +128,6 @@ watch([pokemonFilter, () => { pagination.pageSize }], () => {
 .market-itens *:not(.functions-wrapper *) {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
-    gap: 4rem;
     place-items: center;
 }
 </style>
