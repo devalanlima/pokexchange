@@ -3,7 +3,7 @@
         
         <input 
         type="text" 
-        placeholder="e.g. Pikachu" 
+        placeholder="e.g. Aerodactyl" 
         v-model.trim="pokemon.name"
         id="filter-name"
         />
