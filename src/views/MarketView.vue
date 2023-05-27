@@ -92,8 +92,7 @@ watch([pokemonFilter, () => { pagination.pageSize }], () => {
 }
 
 .search-filter {
-    max-width: 30rem;
-    min-width: 25rem;
+    width: 25rem;
     max-height: 80vh;
     position: sticky;
     top: 10rem;
@@ -107,6 +106,7 @@ watch([pokemonFilter, () => { pagination.pageSize }], () => {
     display: flex;
     position: relative;
     align-items: center;
+    margin: 2rem 0 4rem;
 }
 
 .btn-wrapper {
@@ -125,5 +125,6 @@ watch([pokemonFilter, () => { pagination.pageSize }], () => {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
     place-items: center;
+    row-gap: 4rem;
 }
 </style>

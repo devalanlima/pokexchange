@@ -161,6 +161,7 @@ switch (true) {
     position: relative;
     padding: 2.5rem;
     user-select: none;
+    cursor: pointer;
 }
 
 .container {

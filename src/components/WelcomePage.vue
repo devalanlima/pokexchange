@@ -40,6 +40,7 @@
                     :type="''"
                     :hp="''"
                     :imageSize="'large'"
+                    :havePrice="false"
                 />
             </div>
             <div class="card2">
@@ -54,6 +55,7 @@
                     :type="''"
                     :hp="''"
                     :imageSize="'large'"
+                    :havePrice="false"
                 />
             </div>
             <div class="card3">
@@ -68,6 +70,7 @@
                     :type="''"
                     :hp="''"
                     :imageSize="'large'"
+                    :havePrice="false"
                 />
             </div>
         </div>
@@ -176,7 +179,7 @@ h2 {
     height: 45rem;
 }
 
-.card1 .loading, .card1 .loading, .card3 .loading  {
+.card1 .loading, .card2 .loading, .card3 .loading  {
     width: 27.1rem;
     height: 40rem;
 }

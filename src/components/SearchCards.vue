@@ -1,19 +1,23 @@
 <template>
-    
-        <div v-if="isLoading">
-            <div class="loading" v-for="each in props.pageSize" :key="each">
-                <div class="skeleton"></div>
+    <div v-if="isLoading">
+        <div class="wrapper-cards" v-for="each in props.pageSize" :key="each">
+            <PriceConvert v-if="props.havePrice" class="price" :price-e-u-r="0" />
+            <div class="wrapper-loading">
+                <div class="loading">
+                    <div class="skeleton"></div>
+                </div>
             </div>
         </div>
+    </div>
 
-        <div v-else-if="isFinished">
-            <div v-for="pokemon in dataArr" :key="pokemon.id" >
-                <ParallaxEffect :rarity-card="pokemon.rarity">
-                    <img :src="pokemon.images[`${props.imageSize}`]"
-                        :alt="pokemon.name">
-                </ParallaxEffect>
-            </div>
+    <div v-else-if="isFinished">
+        <div class="wrapper-cards" v-for="pokemon in dataArr" :key="pokemon.id">
+            <PriceConvert v-if="props.havePrice" class="price" :price-e-u-r="pokemon.cardmarket.prices.trendPrice" />
+            <ParallaxEffect :rarity-card="pokemon.rarity">
+                <img :src="pokemon.images[`${props.imageSize}`]" :alt="pokemon.name">
+            </ParallaxEffect>
         </div>
+    </div>
 </template>
 
 <script setup>
@@ -21,6 +25,7 @@ import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import { useAxios } from '@vueuse/integrations/useAxios'
 import ParallaxEffect from './ParallaxEffect.vue'
+import PriceConvert from './PriceConvert.vue'
 
 import { useOffsetPagination } from '../stores/StoreOffsetPagination'
 
@@ -43,7 +48,8 @@ const props = defineProps({
     rarity: { type: String, default: '', required: true },
     type: { type: String, default: '', required: true },
     hp: { type: String, default: '', required: true },
-    imageSize: { type: String, default: 'small' }
+    imageSize: { type: String, default: 'large' },
+    havePrice: {type: Boolean, default: true}
 })
 
 const { data, isLoading, isFinished, execute } = useAxios({
@@ -80,15 +86,27 @@ img {
     border-radius: 1rem;
 }
 
+.wrapper-loading{
+    width: 100%;
+    height: 100%;
+}
 .loading {
     box-sizing: border-box;
-    width: 21.7rem;
-    height: 30.3rem;
+    min-width: 20rem;
+    min-height: 27.9rem;
     margin: 3rem;
-    border-radius: 15px;
+    border-radius: 10px;
     position: relative;
-    background: rgb(45, 46, 58);
+    background: rgba(105, 105, 105, 0.993);
     overflow: hidden;
+    transition: box-shadow 0.4s ease, opacity .33s ease-out, transform .45s cubic-bezier(.2, .49, .32, .99);
+    box-shadow: 0 0 3px -1px transparent,
+        0 0 2px 1px transparent,
+        0 0 5px 0px transparent,
+        0px 10px 20px -5px black,
+        0 2px 15px -5px black,
+        0 0 20px 0px transparent;
+        z-index: 1;
 }
 
 .skeleton {
@@ -108,6 +126,27 @@ img {
     100% {
         transform: translateX(300px);
     }
+}
+
+.wrapper-cards{
+    position: relative;
+}
+
+.price{
+    box-sizing: border-box;
+    position: absolute;
+    left: 50%;
+    top: -8%;
+    transform: translateX(-50%);
+    border: 1px solid rgba(255, 255, 255, 0.582);
+    padding: 2rem;
+    border-radius: 1rem;
+    width: 95%;
+    height: 105%;
+    pointer-events: none;
+    background-color: rgba(145, 222, 255, 0.158);
+    backdrop-filter: (1rem);
+    
 }
 
 </style>
