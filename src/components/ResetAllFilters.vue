@@ -54,10 +54,8 @@ span {
 }
 button:hover span{
     font-size: 2.1rem;
-    color: var(--color-third);
 }
 button:hover{
     font-size: 2.1rem;
-    color: var(--color-third);
 }
 </style>

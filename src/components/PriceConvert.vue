@@ -36,6 +36,7 @@ p {
     gap: 1rem;
     justify-content: center;
     color: var(--color-white);
-    
+    min-width: 25rem;
+    min-height: 35rem;
 }
 </style>

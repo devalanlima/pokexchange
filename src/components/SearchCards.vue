@@ -1,20 +1,17 @@
 <template>
-    <div v-if="isLoading">
-        <div class="wrapper-cards" v-for="each in props.pageSize" :key="each">
-            <PriceConvert v-if="props.havePrice" class="price" :price-e-u-r="0" />
-            <div class="wrapper-loading">
-                <div class="loading">
-                    <div class="skeleton"></div>
-                </div>
+    <div class="wrapper-loading" v-if="isLoading">
+        <div class="wrapper-cards" v-for="each in pagination.pageSize" :key="each">
+            <PriceConvert class="price" :price-e-u-r="0" />
+            <div class="loading">
+                <span class="skeleton"></span>
             </div>
         </div>
     </div>
-
-    <div v-else-if="isFinished">
+    <div class="wrapper-all-cards" v-else-if="isFinished">
         <div class="wrapper-cards" v-for="pokemon in dataArr" :key="pokemon.id">
             <PriceConvert v-if="props.havePrice" class="price" :price-e-u-r="pokemon.cardmarket.prices.trendPrice" />
             <ParallaxEffect :rarity-card="pokemon.rarity">
-                <img :src="pokemon.images[`${props.imageSize}`]" :alt="pokemon.name">
+                <img v-if="isFinished" :src="pokemon.images[`${props.imageSize}`]" :alt="pokemon.name">
             </ParallaxEffect>
         </div>
     </div>
@@ -48,8 +45,8 @@ const props = defineProps({
     rarity: { type: String, default: '', required: true },
     type: { type: String, default: '', required: true },
     hp: { type: String, default: '', required: true },
-    imageSize: { type: String, default: 'large' },
-    havePrice: {type: Boolean, default: true}
+    imageSize: { type: String, default: 'small' },
+    havePrice: { type: Boolean, default: true }
 })
 
 const { data, isLoading, isFinished, execute } = useAxios({
@@ -86,14 +83,15 @@ img {
     border-radius: 1rem;
 }
 
-.wrapper-loading{
+.wrapper-loading {
     width: 100%;
     height: 100%;
 }
+
 .loading {
     box-sizing: border-box;
-    min-width: 20rem;
-    min-height: 27.9rem;
+    width: 20rem;
+    height: 27.9rem;
     margin: 3rem;
     border-radius: 10px;
     position: relative;
@@ -106,13 +104,14 @@ img {
         0px 10px 20px -5px black,
         0 2px 15px -5px black,
         0 0 20px 0px transparent;
-        z-index: 1;
+    z-index: 1;
 }
 
 .skeleton {
+    position: absolute;
     width: 100%;
     height: 160%;
-    background: linear-gradient(to right, transparent 30%, rgba(219, 219, 219, 0.158) 50%, transparent 70%);
+    background: linear-gradient(to right, transparent 30%, rgba(219, 219, 219, 0.192) 50%, transparent 70%);
     rotate: 45deg;
     background-position: center;
     animation: loading infinite .8s ease-in-out;
@@ -128,11 +127,11 @@ img {
     }
 }
 
-.wrapper-cards{
+.wrapper-cards {
     position: relative;
 }
 
-.price{
+.price {
     box-sizing: border-box;
     position: absolute;
     left: 50%;
@@ -146,7 +145,6 @@ img {
     pointer-events: none;
     background-color: rgba(145, 222, 255, 0.158);
     backdrop-filter: (1rem);
-    
-}
 
+}
 </style>
