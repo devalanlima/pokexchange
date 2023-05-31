@@ -29,56 +29,22 @@
         </div>
         <div class="three-cards">
             <div class="card1">
-                <SearchCards
-                    :order="'number'"
-                    :pageSize="1"
-                    :currentPage="1"
-                    :name="'char'"
-                    :subtype="'*'"
-                    :supertype="'*'"
-                    :rarity="'Rare Holo VMAX'"
-                    :type="''"
-                    :hp="''"
-                    :imageSize="'large'"
-                    :havePrice="false"
-                />
+                <ParallaxEffect :rarityCard="'Rare Holo VMAX'">
+                    <img src="https://images.pokemontcg.io/swsh3/20_hires.png" alt="Charizard card">
+                </ParallaxEffect>
             </div>
             <div class="card2">
-                <SearchCards
-                    :order="'number'"
-                    :pageSize="1"
-                    :currentPage="1"
-                    :name="'blastoise'"
-                    :subtype="'MEGA'"
-                    :supertype="'*'"
-                    :rarity="'*'"
-                    :type="''"
-                    :hp="''"
-                    :imageSize="'large'"
-                    :havePrice="false"
-                />
+                <img src="https://images.pokemontcg.io/g1/18_hires.png" alt="Blastoise card">
             </div>
             <div class="card3">
-                <SearchCards
-                    :order="'number'"
-                    :pageSize="1"
-                    :currentPage="1"
-                    :name="'ven'"
-                    :subtype="'MEGA'"
-                    :supertype="'*'"
-                    :rarity="'*'"
-                    :type="''"
-                    :hp="''"
-                    :imageSize="'large'"
-                    :havePrice="false"
-                />
+                <img src="https://images.pokemontcg.io/xy1/2_hires.png" alt="Ivysaur card">
             </div>
         </div>
     </article>
 </template>
 
 <script setup>
-import SearchCards from './SearchCards.vue';
+import ParallaxEffect from './ParallaxEffect.vue';
 </script>
 
 <style scoped>
@@ -153,7 +119,7 @@ h2 {
     position: absolute;
 }
 .card1{
-    top: 3rem;
+    top: 2rem;
     left: 0rem;
     rotate: -10deg;
     z-index: 2;
@@ -167,20 +133,13 @@ h2 {
 }
 
 .card3{
-    top: 1rem;
+    top: 2rem;
     left: 20rem;
     rotate: 10deg;
     pointer-events: none;
 }
-</style>
-<style>
 .card1 img, .card2 img, .card3 img {
     width: 32.1rem;
     height: 45rem;
-}
-
-.card1 .loading, .card2 .loading, .card3 .loading  {
-    width: 27.1rem;
-    height: 40rem;
 }
 </style>

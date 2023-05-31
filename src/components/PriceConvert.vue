@@ -1,7 +1,6 @@
 <template>
-    
-    <p v-if="isLoading"><i class="fa-brands fa-ethereum"></i>0.000000 ETH</p>
-    <p v-else-if="isFinished"><i class="fa-brands fa-ethereum"></i>{{ finalPrice }} ETH
+    <p class="price" v-if="isLoading"><i class="fa-brands fa-ethereum"></i>0.000000 ETH</p>
+    <p class="price" v-else-if="isFinished"><i class="fa-brands fa-ethereum"></i>{{ finalPrice }} ETH
     </p>
 </template>
 
@@ -30,13 +29,11 @@ execute('/ETH-EUR')
 </script>
 
 <style scoped>
-p {
+.price {
     font-size: 2rem;
     display: flex;
     gap: 1rem;
     justify-content: center;
     color: var(--color-white);
-    min-width: 25rem;
-    min-height: 35rem;
 }
 </style>

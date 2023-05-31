@@ -172,12 +172,7 @@ switch (true) {
     border-radius: 1rem;
     text-align: center;
     transition: box-shadow 0.4s ease, opacity .33s ease-out, transform .45s cubic-bezier(.2, .49, .32, .99);
-    box-shadow: 0 0 3px -1px transparent,
-        0 0 2px 1px transparent,
-        0 0 5px 0px transparent,
-        0px 10px 20px -5px black,
-        0 2px 15px -5px black,
-        0 0 20px 0px transparent;
+    box-shadow: 0px 5px 5px rgba(12, 12, 49, 0.493);
 }
 
 .grain {

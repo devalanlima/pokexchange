@@ -1,14 +1,16 @@
 <template>
-    <div class="wrapper-loading" v-if="isLoading">
+    <div class="wrapper-loading" v-if="isLoading && !isFinished">
         <div class="wrapper-cards" v-for="each in pagination.pageSize" :key="each">
-            <PriceConvert class="price" :price-e-u-r="0" />
+            <PriceConvert v-if="props.havePrice" class="price" :price-e-u-r="0" />
             <div class="loading">
                 <span class="skeleton"></span>
             </div>
         </div>
     </div>
     <div class="wrapper-all-cards" v-else-if="isFinished">
-        <div class="wrapper-cards" v-for="pokemon in dataArr" :key="pokemon.id">
+        <ModalInfos class="modal" v-if="isModalOpen" :pokemon-id="cardId" />
+        <div class="wrapper-cards" v-for="pokemon in dataArr" :key="pokemon.id" :id="pokemon.id" @click="openModal"
+            ref="target">
             <PriceConvert v-if="props.havePrice" class="price" :price-e-u-r="pokemon.cardmarket.prices.trendPrice" />
             <ParallaxEffect :rarity-card="pokemon.rarity">
                 <img v-if="isFinished" :src="pokemon.images[`${props.imageSize}`]" :alt="pokemon.name">
@@ -23,6 +25,8 @@ import axios from 'axios'
 import { useAxios } from '@vueuse/integrations/useAxios'
 import ParallaxEffect from './ParallaxEffect.vue'
 import PriceConvert from './PriceConvert.vue'
+import ModalInfos from './ModalInfos.vue'
+import { onClickOutside } from '@vueuse/core'
 
 import { useOffsetPagination } from '../stores/StoreOffsetPagination'
 
@@ -45,7 +49,7 @@ const props = defineProps({
     rarity: { type: String, default: '', required: true },
     type: { type: String, default: '', required: true },
     hp: { type: String, default: '', required: true },
-    imageSize: { type: String, default: 'small' },
+    imageSize: { type: String, default: 'large' },
     havePrice: { type: Boolean, default: true }
 })
 
@@ -73,6 +77,23 @@ onMounted(() => {
         })
         .catch((error) => { console.log(error); })
 })
+
+const isModalOpen = ref(false)
+const cardId = ref()
+const openModal = (event) => {
+    isModalOpen.value = true
+    const element = event.target.closest('.wrapper-cards')
+    cardId.value = element.id
+}
+
+const target = ref(null)
+
+onClickOutside(target, () => {
+    if(isModalOpen.value){
+        isModalOpen.value = false
+    }
+} )
+
 </script>
 
 <style scoped>
@@ -98,12 +119,7 @@ img {
     background: rgba(105, 105, 105, 0.993);
     overflow: hidden;
     transition: box-shadow 0.4s ease, opacity .33s ease-out, transform .45s cubic-bezier(.2, .49, .32, .99);
-    box-shadow: 0 0 3px -1px transparent,
-        0 0 2px 1px transparent,
-        0 0 5px 0px transparent,
-        0px 10px 20px -5px black,
-        0 2px 15px -5px black,
-        0 0 20px 0px transparent;
+    box-shadow: 0px 5px 5px rgb(12, 12, 49);
     z-index: 1;
 }
 
@@ -129,6 +145,7 @@ img {
 
 .wrapper-cards {
     position: relative;
+    max-width: 28rem;
 }
 
 .price {
@@ -144,7 +161,6 @@ img {
     height: 105%;
     pointer-events: none;
     background-color: rgba(145, 222, 255, 0.158);
-    backdrop-filter: (1rem);
-
+    backdrop-filter: blur(1rem);
 }
 </style>
