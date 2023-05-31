@@ -1,18 +1,29 @@
 html{
     font-size: 62.5%;
+    width: calc(100vw - 1rem);
+    scrollbar-color:  var(--color-third) transparent;
+    scrollbar-width: thin;
+    box-sizing: border-box;
+    padding: 0 3rem;
+    max-width: 170rem;
+    margin: 0 auto; 
 }
 
 body{
     font-family: var(--font-Roboto);
     background-color: var(--color-first);
-    color: var(--color-white);
+    color: var(--color-white);   
 }
 
 ::-webkit-scrollbar {
-    width: .5rem;               /* width of the entire scrollbar */
+    width: .5rem;           /* width of the entire scrollbar */
 }
 
 ::-webkit-scrollbar-thumb {
     background-color: var(--color-third);   
-    border-radius: .3rem;
+    border-radius: .5rem;
+}
+
+::-webkit-scrollbar:hover{
+    width: 1rem; 
 }

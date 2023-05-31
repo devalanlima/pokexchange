@@ -2,7 +2,7 @@
     <div class="latest-cards">
         <h3>Latest Cards</h3>
         <div class="cards-wrapper">
-            <SearchCards :order="'number'" :pageSize="10" :currentPage="randomInt(pagination.totalPages, 1)" :name="''"
+            <SearchCards :order="'number'" :pageSize="10" :currentPage="randomInt(1070, 1)" :name="''"
                 :subtype="'*'" :supertype="'*'" :rarity="'*'" :type="''" :hp="''" />
         </div>
     </div>
@@ -10,9 +10,6 @@
 
 <script setup>
 import SearchCards from "../components/SearchCards.vue";
-import { useOffsetPagination } from "../stores/StoreOffsetPagination";
-
-const pagination = useOffsetPagination()
 
 const randomInt = (max, min) => {
     return Math.floor(Math.random() * (max + 1 - min) + min)

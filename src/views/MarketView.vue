@@ -136,6 +136,7 @@ watch([pokemonFilter, () => { pagination.pageSize }], () => {
     display: flex;
     flex-direction: column;
     width: 100%;
+    min-height: 100vh;
 }
 
 .market-itens *:not(.functions-wrapper *) {

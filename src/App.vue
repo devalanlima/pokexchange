@@ -96,17 +96,3 @@ import MainFooter from './components/MainFooter.vue';
     }
 }
 </style>
-
-<style>
-header {
-    margin: 0 auto;
-
-}
-
-#app {
-    box-sizing: border-box;
-    padding: 0 3rem;
-    max-width: 170rem;
-    margin: 0 auto;
-}
-</style>
