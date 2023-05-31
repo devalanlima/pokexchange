@@ -1,13 +1,19 @@
 <template>
     <div class="market-wrapper">
         <div class="search-filter">
-            <FilterName />
-            <FilterSupertype />
-            <FilterRarity />
-            <FilterSubtype />
-            <FilterTypes v-if="pokemonFilter.supertype == 'Pokémon'" :key="renderKey" />
-            <FilterHP v-if="pokemonFilter.supertype !== 'Energy'" :key="renderKey" />
-            <ResetAllFilters />
+            <button class="show-filter" @click="showFilter">
+                <i class="fa-solid fa-filter" title="Previous">
+                </i>
+            </button>
+            <div class="all-filters" v-if="!isFilterShow">
+                <FilterName class="filter-name" />
+                <FilterSupertype />
+                <FilterRarity />
+                <FilterSubtype />
+                <FilterTypes v-if="pokemonFilter.supertype == 'Pokémon'" :key="renderKey" />
+                <FilterHP v-if="pokemonFilter.supertype !== 'Energy'" :key="renderKey" />
+                <ResetAllFilters />
+            </div>
         </div>
 
         <div class="market-itens">
@@ -96,6 +102,11 @@ watch([pokemonFilter, () => { pagination.pageSize }], () => {
     pagination.currentPage = 1
 })
 
+const isFilterShow = ref(false)
+const showFilter = () => {
+    isFilterShow.value = !isFilterShow.value
+}
+
 </script>
 
 <style scoped>
@@ -104,17 +115,22 @@ watch([pokemonFilter, () => { pagination.pageSize }], () => {
     grid-template-columns: 1fr 4.8fr;
     width: 100%;
     margin-top: 5rem;
+    gap: 2rem;
 }
 
 .search-filter {
-    width: 25rem;
     max-height: 80vh;
     position: sticky;
     top: 10rem;
-    margin-top: 2rem;
+    min-width: 30rem;
+    max-width: 40rem;
+}
+
+.all-filters {
     display: flex;
     flex-direction: column;
     gap: 3rem;
+    margin-top: 3rem;
 }
 
 .functions-wrapper {
@@ -146,7 +162,7 @@ watch([pokemonFilter, () => { pagination.pageSize }], () => {
     row-gap: 4rem;
 }
 
-button {
+.btn-wrapper button {
     background: none;
     border: none;
     color: var(--color-white);
@@ -155,7 +171,7 @@ button {
     font-size: 1.5rem;
 }
 
-button:hover {
+.btn-wrapper button:hover {
     color: var(--color-second);
 }
 
@@ -163,5 +179,129 @@ button:hover {
     color: var(--color-third);
     text-decoration: underline;
     font-weight: 600;
+}
+
+.show-filter {
+    display: none;
+    position: absolute;
+    z-index: 5;
+    width: 5rem;
+    height: 5rem;
+    font-size: 3rem;
+    color: var(--color-first);
+    background: none;
+    border: none;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 1rem;
+    opacity: .7;
+    left: 1rem;
+    top: 1rem;
+    user-select: none;
+}
+
+.show-filter[click]{
+    opacity: 1;
+}
+</style>
+
+<style scoped>
+@media (max-width: 640px) {
+
+    /* Extra Small */
+    .show-filter {
+        display: block;
+    }
+
+    .btn-wrapper {
+        display: none;
+    }
+
+    .search-filter {
+        display: flex;
+        position: fixed;
+        z-index: 2;
+        left: 4rem;
+        right: 4rem;
+        margin-top: 1rem;
+    }
+
+    .all-filters {
+        background-color: rgba(12, 12, 49, 0.945);
+        padding-bottom: 2rem;
+        border-radius: 1rem;
+        padding: 2rem;
+        margin-top: 0rem;
+    }
+
+    .filter-name {
+        margin-top: 7rem;
+    }
+
+    .market-wrapper {
+        display: flex;
+
+    }
+}
+
+@media (min-width: 640.1px) and (max-width: 768px) {
+
+    /* Small */
+    .show-filter {
+        display: block;
+    }
+
+    .btn-wrapper {
+        display: none;
+    }
+
+    .search-filter {
+        display: flex;
+        position: fixed;
+        z-index: 2;
+        left: 4rem;
+        right: 4rem;
+        margin-top: 1rem;
+    }
+
+    .all-filters {
+        background-color: rgba(12, 12, 49, 0.945);
+        padding-bottom: 2rem;
+        border-radius: 1rem;
+        padding: 2rem;
+        margin-top: 0rem;
+    }
+
+    .filter-name {
+        margin-top: 7rem;
+    }
+
+    .market-wrapper {
+        display: flex;
+
+    }
+}
+
+@media (min-width: 768.1px) and (max-width: 1024px) {
+
+    /* Medium */
+    .btn-wrapper {
+        display: none;
+    }
+}
+
+@media (min-width: 1024.1px) and (max-width: 1280px) {
+    /* Large */
+
+}
+
+@media (min-width: 1280.1px) and (max-width: 1536px) {
+    /* Extra Large */
+
+}
+
+@media (min-width: 1536.1px) {
+    /* 2x Extra Large */
+
 }
 </style>
