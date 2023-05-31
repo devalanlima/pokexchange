@@ -32,7 +32,6 @@ import NavBar from './components/NavBar.vue';
     height: 100%;
     position: fixed;
     overflow: hidden;
-    border: 1px dotted aqua;
     z-index: -1;
 }
 

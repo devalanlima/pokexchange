@@ -18,15 +18,15 @@
 
 <style scoped>
 nav {
-
     font-size: 2rem;
     display: flex;
     gap: 2rem;
-    justify-content: space-between;
     align-items: center;
     color: var(--color-white);
     margin: 2rem auto;
     overflow: hidden;
+    width: 100%;
+    justify-content: space-between;
 }
 
 .logo {
@@ -38,7 +38,11 @@ nav {
 }
 
 .logo img {
-    height: 12rem;
+    height: 8rem;
+}
+
+h1{
+    font-size: 2.7rem;
 }
 
 .nav-poke {
@@ -47,7 +51,7 @@ nav {
 
 .nav-change {
     color: var(--color-third);
-    margin-left: -1rem;
+    margin-left: -.5rem;
 }
 
 .links-nav {
@@ -55,7 +59,6 @@ nav {
     flex-grow: 1;
     justify-content: space-between;
     max-width: 50rem;
-    margin: 0 auto;
     gap: 2rem;
 }
 
@@ -85,7 +88,7 @@ a {
     color: var(--color-white);
     text-decoration: none;
     font-family: var(--font-Roboto);
-    font-weight: 300;
+    font-weight: 400;
 }
 </style>
 

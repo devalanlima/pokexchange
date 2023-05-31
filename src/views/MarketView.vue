@@ -7,17 +7,32 @@
             <FilterSubtype />
             <FilterTypes v-if="pokemonFilter.supertype == 'Pokémon'" :key="renderKey" />
             <FilterHP v-if="pokemonFilter.supertype !== 'Energy'" :key="renderKey" />
-            <ResetAllFilters/>
+            <ResetAllFilters />
         </div>
 
         <div class="market-itens">
             <div class="functions-wrapper">
                 <div class="btn-wrapper">
-                    <button @click="pagination.pageSize = 25">25</button>
-                    <button @click="pagination.pageSize = 50">50</button>
-                    <button @click="pagination.pageSize = 100">100</button>
-                    <button @click="pokemonFilter.order = 'name'">A - Z</button>
-                    <button @click="pokemonFilter.order = '-name'">Z - A</button>
+                    <button @click="pagination.pageSize = 25" :class="[{ 'selected': pagination.pageSize == 25 }]">
+                        25
+                    </button>
+
+                    <button @click="pagination.pageSize = 50" :class="[{ 'selected': pagination.pageSize == 50 }]">
+                        50
+                    </button>
+
+                    <button @click="pagination.pageSize = 100" :class="[{ 'selected': pagination.pageSize == 100 }]">
+                        100
+                    </button>
+                    |
+                    <button @click="pokemonFilter.order = 'name'" :class="[{ 'selected': pokemonFilter.order == 'name' }]">
+                        A - Z
+                    </button>
+
+                    <button @click="pokemonFilter.order = '-name'"
+                        :class="[{ 'selected': pokemonFilter.order == '-name' }]">
+                        Z - A
+                    </button>
                 </div>
                 <OffsetPagination />
             </div>
@@ -112,6 +127,8 @@ watch([pokemonFilter, () => { pagination.pageSize }], () => {
 .btn-wrapper {
     position: absolute;
     right: 0;
+    font-size: 2rem;
+    padding: 1rem;
 }
 
 .market-itens {
@@ -126,5 +143,24 @@ watch([pokemonFilter, () => { pagination.pageSize }], () => {
     grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
     place-items: center;
     row-gap: 4rem;
+}
+
+button {
+    background: none;
+    border: none;
+    color: var(--color-white);
+    font-family: var(--font-Noto-Sans);
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+button:hover {
+    color: var(--color-second);
+}
+
+.selected {
+    color: var(--color-third);
+    text-decoration: underline;
+    font-weight: 600;
 }
 </style>
