@@ -2,7 +2,7 @@
     <div class="latest-cards">
         <h3>Latest Cards</h3>
         <div class="cards-wrapper">
-            <SearchCards :order="'number'" :pageSize="10" :currentPage="randomInt(1070, 1)" :name="''"
+            <SearchCards :order="'number'" :pageSize="10" :currentPage="randomInt(1070, 2)" :name="''"
                 :subtype="'*'" :supertype="'*'" :rarity="'*'" :type="''" :hp="''" />
         </div>
     </div>
@@ -12,7 +12,8 @@
 import SearchCards from "../components/SearchCards.vue";
 
 const randomInt = (max, min) => {
-    return Math.floor(Math.random() * (max + 1 - min) + min)
+    const randomPage = Math.floor(Math.random() * (max + 1 - min) + min)
+    return randomPage
 }
 </script>
 

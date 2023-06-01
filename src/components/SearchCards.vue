@@ -11,7 +11,11 @@
         <ModalInfos class="modal" v-if="isModalOpen" :pokemon-id="cardId" />
         <div class="wrapper-cards" v-for="pokemon in dataArr" :key="pokemon.id" :id="pokemon.id" @click="openModal"
             ref="target">
-            <PriceConvert v-if="props.havePrice" class="price" :price-e-u-r="pokemon.cardmarket.prices.trendPrice" />
+            <PriceConvert v-if="props.havePrice" class="price" 
+            :price-e-u-r="Object.prototype.hasOwnProperty.call(pokemon, 'cardmarket')
+            ?pokemon.cardmarket.prices.trendPrice
+            :'NO OFFERS'" 
+            />
             <ParallaxEffect :rarity-card="pokemon.rarity">
                 <img v-if="isFinished" :src="pokemon.images[`${props.imageSize}`]" :alt="pokemon.name">
             </ParallaxEffect>
@@ -73,10 +77,15 @@ onMounted(() => {
     execute(`/cards?orderBy=${props.order}`)
         .then(() => {
             dataArr.value = data.value.data
-            pagination.totalPages = Math.ceil(data.value.totalCount / props.pageSize)
+            pagination.totalPages = Math.ceil(data.value.totalCount / props.pageSize)            
         })
         .catch((error) => { console.log(error); })
 })
+
+
+
+
+
 
 const isModalOpen = ref(false)
 const cardId = ref()
@@ -89,10 +98,10 @@ const openModal = (event) => {
 const target = ref(null)
 
 onClickOutside(target, () => {
-    if(isModalOpen.value){
+    if (isModalOpen.value) {
         isModalOpen.value = false
     }
-} )
+})
 
 </script>
 

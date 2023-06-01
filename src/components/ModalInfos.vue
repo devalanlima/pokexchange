@@ -110,7 +110,11 @@ onMounted(() => {
             pokemon.src = myData.images.large
             pokemon.name = myData.name
             pokemon.types = myData.types
-            pokemon.price = myData.cardmarket.prices.trendPrice
+            if (Object.prototype.hasOwnProperty.call(myData, 'cardmarket')) {
+                pokemon.price = myData.cardmarket.prices.trendPrice
+            } else {
+                pokemon.price = "NO OFFERS"
+            }
             if (Object.prototype.hasOwnProperty.call(myData, 'attacks')) {
                 pokemon.attacks = myData.attacks
             }

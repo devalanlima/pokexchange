@@ -1,7 +1,6 @@
 <template>
     <p class="price" v-if="isLoading"><i class="fa-brands fa-ethereum"></i>0.000000 ETH</p>
-    <p class="price" v-else-if="isFinished"><i class="fa-brands fa-ethereum"></i>{{ finalPrice }} ETH
-    </p>
+    <p :class="['price', {'no-offers': isNaN(props.priceEUR)}]" v-else-if="isFinished"><i class="fa-brands fa-ethereum"></i>{{ finalPrice }}</p>
 </template>
 
 <script setup>
@@ -22,7 +21,11 @@ const { data, execute, isLoading, isFinished } = useAxios(instanceEUR)
 execute('/ETH-EUR')
     .then(() => {
         const convertEURtoETH = data.value.ETHEUR.ask * 100
-        finalPrice.value = (props.priceEUR / convertEURtoETH).toFixed(6)
+        if (isNaN(props.priceEUR)) {
+            finalPrice.value = 'NO OFFERS'
+        } else {
+            finalPrice.value = `${(props.priceEUR / convertEURtoETH).toFixed(6)} ETH`
+        }
     }).catch((error) => {
         console.log(error);
     })
@@ -35,5 +38,9 @@ execute('/ETH-EUR')
     gap: 1rem;
     justify-content: center;
     color: var(--color-white);
+}
+
+.no-offers{
+    color: var(--color-second);
 }
 </style>
