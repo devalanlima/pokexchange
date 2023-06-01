@@ -82,11 +82,6 @@ onMounted(() => {
         .catch((error) => { console.log(error); })
 })
 
-
-
-
-
-
 const isModalOpen = ref(false)
 const cardId = ref()
 const openModal = (event) => {

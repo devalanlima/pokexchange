@@ -1,8 +1,8 @@
 <template>
-    <div class="modal" v-if="isFinished">
+    <div class="modal" v-if="!isFinished">
         <div class="wrapper-card">
-            <ParallaxEffect class="card" :rarity-card="'Rare Holo VMAX'">
-                <img :src="pokemon.src" alt="">
+            <ParallaxEffect class="card" :rarity-card="pokemon.rarity">
+                <img :src="pokemon.src" :alt="pokemon.name">
             </ParallaxEffect>
             <div class="wrapper-price">
                 <button class="buy-button">
@@ -77,7 +77,7 @@ import PriceConvert from './PriceConvert.vue'
 
 import axios from 'axios'
 import { useAxios } from '@vueuse/integrations/useAxios'
-import { onMounted, reactive } from 'vue';
+import { onMounted, reactive, ref } from 'vue';
 
 const instance = axios.create({
     baseURL: 'https://api.pokemontcg.io/v2',
@@ -85,7 +85,7 @@ const instance = axios.create({
         'X-Api-Key': 'e5551245-1708-4b50-aa17-610cda943f9f'
     }
 })
-const { data, isFinished, execute } = useAxios(instance)
+const { data, execute } = useAxios(instance)
 
 const props = defineProps({
     pokemonId: { type: String, default: 'ex13-2' }
@@ -102,7 +102,11 @@ const pokemon = reactive({
     retreatCost: '',
     resistances: '',
     price: 0,
+    rarity: '',
 })
+
+
+const isFinished = ref(true)
 onMounted(() => {
     execute(`/cards/${props.pokemonId}`)
         .then(() => {
@@ -110,6 +114,7 @@ onMounted(() => {
             pokemon.src = myData.images.large
             pokemon.name = myData.name
             pokemon.types = myData.types
+            pokemon.rarity = myData.rarity
             if (Object.prototype.hasOwnProperty.call(myData, 'cardmarket')) {
                 pokemon.price = myData.cardmarket.prices.trendPrice
             } else {
@@ -133,7 +138,7 @@ onMounted(() => {
             if (Object.prototype.hasOwnProperty.call(myData, 'retreatCost')) {
                 pokemon.retreatCost = myData.retreatCost
             }
-
+            isFinished.value = !isFinished.value
         })
         .catch((error) => { console.log(error); })
 })
