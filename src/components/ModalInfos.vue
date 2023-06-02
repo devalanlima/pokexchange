@@ -340,3 +340,20 @@ p {
     justify-content: center;
 }
 </style>
+
+<style scoped>
+@media (max-width: 640px) {
+
+    /* Extra Small */
+    .modal {
+        flex-direction: column;
+    }
+
+    .wrapper-infos {
+        padding: 2rem;
+        max-height: 15rem;
+        overflow-y: scroll;
+    }
+
+}
+</style>
