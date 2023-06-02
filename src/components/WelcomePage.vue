@@ -177,13 +177,22 @@ h2 {
     .data :last-child {
         font-size: 1.6rem;
     }
-    .card2, .card3{
-        display: none;
-    }
+    
     .card1{
         rotate: 0deg;
         position: relative;
         left: 50%;
+        transform: translateX(-50%);
+    }
+    .card2{
+        top: 2rem;
+        rotate: -10deg;
+        left: calc(40%);
+        transform: translateX(-50%);
+    }
+    .card3{
+        top: 7.5rem;
+        left: calc(60%);
         transform: translateX(-50%);
     }
 }
