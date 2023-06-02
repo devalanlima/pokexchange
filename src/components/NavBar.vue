@@ -10,7 +10,8 @@
             <RouterLink to="/about">About</RouterLink>
         </div>
         <button>
-            <div class="btn-style1">Connect Wallet</div>
+            <div class="btn-style1 text">Connect Wallet</div>
+            <div class="btn-style1 wallet"><i class="fa-solid fa-wallet"></i></div>
             <span class="btn-style2"></span>
         </button>
     </nav>
@@ -41,7 +42,7 @@ nav {
     height: 8rem;
 }
 
-h1{
+h1 {
     font-size: 2.7rem;
 }
 
@@ -135,6 +136,7 @@ button:hover {
     font-weight: 300;
 
 }
+
 .btn-style2 {
     box-sizing: border-box;
     display: block;
@@ -145,9 +147,11 @@ button:hover {
     padding: 0;
     position: absolute;
 }
+
 .btn-style2:hover {
     animation: rotate .8s linear infinite;
 }
+
 @keyframes rotate {
     from {
         transform: rotate(0deg);
@@ -156,5 +160,69 @@ button:hover {
     to {
         transform: rotate(360deg);
     }
+}
+</style>
+
+<style scoped>
+@media (max-width: 640px) {
+
+    /* Extra Small */
+    .logo {
+        display: none;
+    }
+    .links-nav{
+        justify-content: space-around;
+    }
+
+    button {
+        outline: none;
+        border: 2px solid var(--color-third);
+        --radius: 10rem;
+        position: relative;
+        width: 5rem;
+        height: 5rem;
+        min-width: 5rem;
+        min-height: 5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--radius);
+        overflow: hidden;
+        cursor: pointer;
+        transition: scale .1s linear;
+        mix-blend-mode: lighten;
+        margin-right: .5rem;
+    }
+
+    .text {
+        display: none;
+    }
+}
+
+@media (min-width: 640.1px) and (max-width: 9999px) {
+    /* Small */
+    .wallet{
+        display: none;
+    }
+}
+
+@media (min-width: 768.1px) and (max-width: 1024px) {
+    /* Medium */
+
+}
+
+@media (min-width: 1024.1px) and (max-width: 1280px) {
+    /* Large */
+
+}
+
+@media (min-width: 1280.1px) and (max-width: 1536px) {
+    /* Extra Large */
+
+}
+
+@media (min-width: 1536.1px) {
+    /* 2x Extra Large */
+
 }
 </style>
