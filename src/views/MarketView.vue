@@ -1,11 +1,11 @@
 <template>
-    <div class="market-wrapper">
-        <div class="search-filter">
+    <div class="market-wrapper" ref="el">
+        <div class="search-filter" ref="searchFilter">
             <button class="show-filter" @click="showFilter">
-                <i class="fa-solid fa-filter" title="Previous">
-                </i>
+                <i v-if="!openClose" class="fa-solid fa-chevron-right"></i>
+                <i v-else class="fa-solid fa-chevron-left"></i>
             </button>
-            <div class="all-filters" v-if="!isFilterShow">
+            <div class="all-filters">
                 <FilterName class="filter-name" />
                 <FilterSupertype />
                 <FilterRarity />
@@ -67,6 +67,7 @@ import ResetAllFilters from "@/components/ResetAllFilters.vue"
 import { watch, ref } from 'vue'
 import { usePokemonFilters } from '../stores/StorePokemonFilters';
 import { useOffsetPagination } from "../stores/StoreOffsetPagination"
+import { useResizeObserver } from '@vueuse/core'
 
 const pokemonFilter = usePokemonFilters()
 const pagination = useOffsetPagination()
@@ -102,11 +103,34 @@ watch([pokemonFilter, () => { pagination.pageSize }], () => {
     pagination.currentPage = 1
 })
 
-const isFilterShow = ref(false)
+const searchFilter = ref(null)
+const openClose = ref(false)
 const showFilter = () => {
-    isFilterShow.value = !isFilterShow.value
+    if (!openClose.value) {
+        searchFilter.value.style.transform = 'translateY(-50%) translateX(0)'
+        openClose.value = !openClose.value
+    } else {
+        searchFilter.value.style.transform = 'translateY(-50%) translateX(-94%)'
+        openClose.value = !openClose.value
+    }
 }
 
+const el = ref(null)
+const elWidth = ref('')
+useResizeObserver(el, (entries) => {
+    const entry = entries[0]
+    const { width } = entry.contentRect
+    elWidth.value = width
+})
+
+watch(elWidth, () => {
+    if (elWidth.value > 700) {
+        searchFilter.value.style.transform = 'translateY(0) translateX(0)'
+        openClose.value = false
+    } else {
+        searchFilter.value.style.transform = 'translateY(-50%) translateX(-94%)'
+    }
+})
 </script>
 
 <style scoped>
@@ -124,6 +148,7 @@ const showFilter = () => {
     top: 10rem;
     min-width: 30rem;
     max-width: 40rem;
+    transition: transform .5s ease-in-out;
 }
 
 .all-filters {
@@ -182,33 +207,31 @@ const showFilter = () => {
 }
 
 .show-filter {
-    display: none;
-    position: absolute;
-    z-index: 5;
-    width: 5rem;
-    height: 5rem;
-    font-size: 3rem;
-    color: var(--color-first);
-    background: none;
+    position: fixed;
+    right: 0;
+    top: 50%;
+    width: 2rem;
+    height: 63rem;
+    transform: translateY(-50%);
+    background-color: var(--color-third);
     border: none;
+    border-radius: 0 1rem 1rem 0;
+    font-size: 2rem;
+    z-index: 3;
     cursor: pointer;
-    background-color: white;
-    border-radius: 1rem;
-    opacity: .7;
-    left: 1rem;
-    top: 1rem;
+    display: none;
     user-select: none;
 }
-
-.show-filter[click]{
-    opacity: 1;
+.fa-chevron-right{
+    margin-left: -.3rem;
+}
+.fa-chevron-left{
+    margin-left: -.2rem;
 }
 </style>
 
 <style scoped>
 @media (max-width: 640px) {
-
-    /* Extra Small */
     .show-filter {
         display: block;
     }
@@ -220,22 +243,25 @@ const showFilter = () => {
     .search-filter {
         display: flex;
         position: fixed;
-        z-index: 2;
-        left: 4rem;
-        right: 4rem;
-        margin-top: 1rem;
+        z-index: 1;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%) translateX(-94%);
+        width: 50%;
+        max-width: none;
+        padding-right: 2rem;
+        margin: 0;
     }
 
     .all-filters {
+        box-sizing: border-box;
         background-color: rgba(12, 12, 49, 0.945);
-        padding-bottom: 2rem;
-        border-radius: 1rem;
         padding: 2rem;
         margin-top: 0rem;
-    }
-
-    .filter-name {
-        margin-top: 7rem;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        min-height: 63rem;
+        justify-content: center;
     }
 
     .market-wrapper {
@@ -245,8 +271,6 @@ const showFilter = () => {
 }
 
 @media (min-width: 640.1px) and (max-width: 768px) {
-
-    /* Small */
     .show-filter {
         display: block;
     }
@@ -258,22 +282,25 @@ const showFilter = () => {
     .search-filter {
         display: flex;
         position: fixed;
-        z-index: 2;
-        left: 4rem;
-        right: 4rem;
-        margin-top: 1rem;
+        z-index: 1;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%) translateX(-94%);
+        width: 50%;
+        max-width: none;
+        padding-right: 2rem;
+        margin: 0;
     }
 
     .all-filters {
+        box-sizing: border-box;
         background-color: rgba(12, 12, 49, 0.945);
-        padding-bottom: 2rem;
-        border-radius: 1rem;
         padding: 2rem;
         margin-top: 0rem;
-    }
-
-    .filter-name {
-        margin-top: 7rem;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        min-height: 63rem;
+        justify-content: center;
     }
 
     .market-wrapper {
