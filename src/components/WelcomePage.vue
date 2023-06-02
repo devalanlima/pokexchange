@@ -134,6 +134,8 @@ h2 {
     left: 0rem;
     rotate: -10deg;
     z-index: 2;
+    max-width: 37rem;
+
 }
 
 .card2 {
@@ -181,6 +183,8 @@ h2 {
     .card1{
         rotate: 0deg;
         position: relative;
+        left: 50%;
+        transform: translateX(-50%);
     }
 }
 
