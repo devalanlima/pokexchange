@@ -204,12 +204,18 @@ h2 {
 
 @media (min-width: 768.1px) and (max-width: 1024px) {
     /* Medium */
+    .presentation {
+    max-width: 90rem;
 
+}
 }
 
 @media (min-width: 1024.1px) and (max-width: 1280px) {
     /* Large */
+    .presentation {
+    max-width: 90rem;
 
+}
 }
 
 @media (min-width: 1280.1px) and (max-width: 1536px) {
