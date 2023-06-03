@@ -1,7 +1,11 @@
 <template>
     <div>
-        <p>© Copyright - Todos os direitos reservados - Nintedo • Política de Privacidade • Desenvolvido por Alan
-            Lima</p>
+        <p>
+            © Copyright - All rights reserverd - Nintedo • Developed by Alan
+            Lima
+        </p>
+        <p>This website is not produced, endorsed, supported, or affiliated
+            with Nintendo or The Pokémon Company</p>
         <nav>
             <ul>
                 <li>
@@ -40,5 +44,10 @@ ul {
 a {
     text-decoration: none;
     color: var(--color-white);
+}
+
+p{
+    font-size: 1.3rem;
+    text-align: center;
 }
 </style>
