@@ -53,7 +53,7 @@ const props = defineProps({
     rarity: { type: String, default: '', required: true },
     type: { type: String, default: '', required: true },
     hp: { type: String, default: '', required: true },
-    imageSize: { type: String, default: 'large' },
+    imageSize: { type: String, default: 'small' },
     havePrice: { type: Boolean, default: true }
 })
 
