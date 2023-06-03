@@ -71,8 +71,7 @@ input:hover~label {
 
 <style>
 .Colorless {
-    background-color: rgba(237, 239, 241, 0.2);
-    color: #EBEFF3;
+    color: #ffffff;
 }
 input:checked~.Colorless {
     outline: .2rem solid #EBEFF3;
@@ -80,7 +79,6 @@ input:checked~.Colorless {
 }
 
 .Darkness {   
-    background-color: rgb(69, 103, 133, 0.2);
     color: #456785;
 }
 input:checked~.Darkness {
@@ -89,7 +87,6 @@ input:checked~.Darkness {
 }
 
 .Dragon {   
-    background-color: rgb(202, 148, 0, 0.2);
     color: #ca9400;
 }
 input:checked~.Dragon {
@@ -98,7 +95,6 @@ input:checked~.Dragon {
 }
 
 .Fairy {   
-    background-color: rgb(255, 60, 200, 0.2);
     color: #ff3cc8;
 }
 input:checked~.Fairy {
@@ -107,7 +103,6 @@ input:checked~.Fairy {
 }
 
 .Fighting {   
-    background-color: rgb(255, 29, 0, 0.2);
     color: #ff1d00;
 }
 input:checked~.Fighting {
@@ -116,7 +111,6 @@ input:checked~.Fighting {
 }
 
 .Fighting {   
-    background-color: rgb(255, 29, 0, 0.2);
     color: #ff1d00;
 }
 input:checked~.Fighting {
@@ -125,7 +119,6 @@ input:checked~.Fighting {
 }
 
 .Fire {   
-    background-color: rgb(255, 32, 6, 0.2);
     color: #ff2006;
 }
 input:checked~.Fire {
@@ -134,7 +127,6 @@ input:checked~.Fire {
 }
 
 .Grass {   
-    background-color: rgb(0, 163, 23, 0.2);
     color: #00a317;
 }
 input:checked~.Grass {
@@ -143,7 +135,6 @@ input:checked~.Grass {
 }
 
 .Lightning {   
-    background-color: rgb(255, 207, 0, 0.2);
     color: #ffcf00;
 }
 input:checked~.Lightning {
@@ -152,7 +143,6 @@ input:checked~.Lightning {
 }
 
 .Metal {   
-    background-color: rgb(133, 147, 163, 0.2);
     color: rgb(133, 147, 163);
 }
 input:checked~.Metal {
@@ -161,7 +151,6 @@ input:checked~.Metal {
 }
 
 .Psychic{   
-    background-color: rgb(212, 46, 214, 0.2);
     color: rgb(212, 46, 214);
 }
 input:checked~.Psychic{
@@ -170,7 +159,6 @@ input:checked~.Psychic{
 }
 
 .Water{   
-    background-color: rgb(0, 203, 255, 0.2);
     color: rgb(0, 203, 255);
 }
 input:checked~.Water{
