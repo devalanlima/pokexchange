@@ -20,6 +20,10 @@
                 <img v-if="isFinished" :src="pokemon.images[`${props.imageSize}`]" :alt="pokemon.name">
             </ParallaxEffect>
         </div>
+        <div v-if="!dataArr.length">
+            <h3>No cards matches your filter</h3>
+            <img src="/pikachunotfound.png" alt="Not Found">
+        </div>
     </div>
 </template>
 
@@ -79,7 +83,9 @@ onMounted(() => {
             dataArr.value = data.value.data
             pagination.totalPages = Math.ceil(data.value.totalCount / props.pageSize)        
         })
-        .catch((error) => { console.log(error); })
+        .catch((error) => {
+            console.log(error);
+        })
 })
 
 const isModalOpen = ref(false)
@@ -168,5 +174,12 @@ img {
     pointer-events: none;
     background-color: rgba(145, 222, 255, 0.158);
     backdrop-filter: blur(1rem);
+}
+
+h3{
+    font-size: 4rem;
+    font-family: var(--font-Noto-Sans);
+    font-weight: 700;
+    margin-bottom: 3rem;
 }
 </style>

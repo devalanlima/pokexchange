@@ -1,7 +1,7 @@
 <template>
     <div class="pagination-wrapper">
         <button @click="pagination.decrementCurrentPage" :disabled="pagination.currentPage === 1">
-            <i :class="['fa-solid fa-play fa-flip-horizontal', { 'disabled': pagination.currentPage == 1 }]"
+            <i :class="['fa-solid fa-play fa-flip-horizontal', { 'disabled': pagination.currentPage == 1 || pagination.currentPage == 0 }]"
                 title=" Previous">
             </i>
         </button>
@@ -11,7 +11,7 @@
             OF {{ pagination.totalPages }}
         </p>
         <button @click="pagination.incrementCurrentPage" :disabled="pagination.currentPage === pagination.totalPages">
-            <i :class="['fa-solid fa-play', { 'disabled': pagination.currentPage == pagination.totalPages }]"
+            <i :class="['fa-solid fa-play', { 'disabled': pagination.currentPage == pagination.totalPages || pagination.currentPage == 0  }]"
                 title="Next"></i>
         </button>
     </div>
