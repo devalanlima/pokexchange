@@ -194,5 +194,6 @@ switch (true) {
     transform: translateX(-50%) translateY(-50%);
     mix-blend-mode: overlay;
     opacity: .5;
+    pointer-events: none;
 }
 </style>
