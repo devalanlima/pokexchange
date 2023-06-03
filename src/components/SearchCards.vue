@@ -77,7 +77,7 @@ onMounted(() => {
     execute(`/cards?orderBy=${props.order}`)
         .then(() => {
             dataArr.value = data.value.data
-            pagination.totalPages = Math.ceil(data.value.totalCount / props.pageSize)            
+            pagination.totalPages = Math.ceil(data.value.totalCount / props.pageSize)        
         })
         .catch((error) => { console.log(error); })
 })
@@ -150,6 +150,8 @@ img {
 .wrapper-cards {
     position: relative;
     max-width: 28rem;
+    min-height: 33rem;
+    min-width: 25rem;
 }
 
 .price {
