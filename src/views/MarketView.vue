@@ -200,7 +200,7 @@ watch(elWidth, () => {
     color: var(--color-second);
 }
 
-.selected {
+.btn-wrapper .selected {
     color: var(--color-third);
     text-decoration: underline;
     font-weight: 600;
