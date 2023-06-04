@@ -2,8 +2,9 @@
     <div class="market-wrapper" ref="el">
         <div class="search-filter" ref="searchFilter">
             <button class="show-filter" @click="showFilter">
-                <i v-if="!openClose" class="fa-solid fa-chevron-right"></i>
-                <i v-else class="fa-solid fa-chevron-left"></i>
+                <i v-if="!openClose" class="fa-solid fa-chevron-right" title="open menu filter"></i>
+                <i v-else class="fa-solid fa-chevron-left" title="close menu filter"></i>
+                <span class="title-btn">toggle menu view</span>
             </button>
             <div class="all-filters">
                 <FilterName class="filter-name" />
@@ -227,6 +228,12 @@ watch(elWidth, () => {
 }
 .fa-chevron-left{
     margin-left: -.2rem;
+}
+
+.title-btn{
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
 }
 </style>
 
