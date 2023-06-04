@@ -1,6 +1,7 @@
 <template>
     <div class="select-wrapper">
         <select 
+        title="select rarity"
         v-model="pokemon.rarity"
         v-if="pokemon.supertype == 'Pokémon'"
         >
@@ -14,6 +15,7 @@
         </select>
 
         <select 
+        title="select rarity"
         v-model="pokemon.rarity"
         v-else-if="pokemon.supertype == 'Trainer'"
         >
@@ -27,6 +29,7 @@
         </select>
 
         <select 
+        title="select rarity"
         v-model="pokemon.rarity"
         v-else-if="pokemon.supertype == 'Energy'"
         >

@@ -1,20 +1,20 @@
 <template>
     <div class="select-wrapper">
-        <select v-model="pokemon.subtype" v-if="pokemon.supertype == 'Pokémon'">
+        <select v-model="pokemon.subtype" v-if="pokemon.supertype == 'Pokémon'" title="select subtype">
             <option value="*">All Subtypes</option>
             <option :value="subtype" v-for="subtype in subtypes.pokemon" :key="subtype">
                 {{ subtype }}
             </option>
         </select>
 
-        <select v-model="pokemon.subtype" v-else-if="pokemon.supertype == 'Trainer'">
+        <select v-model="pokemon.subtype" v-else-if="pokemon.supertype == 'Trainer'" title="select subtype">
             <option value="*">All Subtypes</option>
             <option :value="subtype" v-for="subtype in subtypes.trainer" :key="subtype">
                 {{ subtype }}
             </option>
         </select>
 
-        <select v-model="pokemon.subtype" v-else-if="pokemon.supertype == 'Energy'">
+        <select v-model="pokemon.subtype" v-else-if="pokemon.supertype == 'Energy'" title="select subtype">
             <option value="*">All Subtypes</option>
             <option :value="subtype" v-for="subtype in subtypes.energy" :key="subtype">
                 {{ subtype }}

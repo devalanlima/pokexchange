@@ -1,7 +1,7 @@
 <template>
     
     <div class="select-wrapper">
-        <select v-model="pokemon.supertype">
+        <select v-model="pokemon.supertype" title="select supertype">
             <option :value="supertype" v-for="supertype in supertypes" :key="supertype">
                 {{ supertype }}
             </option>
