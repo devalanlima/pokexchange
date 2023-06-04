@@ -174,6 +174,7 @@ img {
     pointer-events: none;
     background-color: rgba(145, 222, 255, 0.158);
     backdrop-filter: blur(1rem);
+    -webkit-backdrop-filter: blur(1rem);
 }
 
 h3{

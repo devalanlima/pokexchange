@@ -157,6 +157,7 @@ onMounted(() => {
     border: .2rem solid rgba(255, 255, 255, 0.425);
     border-radius: 3rem;
     backdrop-filter: blur(1rem);
+    -webkit-backdrop-filter: blur(1rem);
     z-index: 3;
     box-shadow: 0 0 10rem rgb(15, 15, 54);
     display: flex;
