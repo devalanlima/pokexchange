@@ -6,7 +6,7 @@
             </i>
         </button>
         <p>PAGE
-            <input ref="input" type="number" min="1" :max="pagination.totalPages" v-model.number="validNumber" @keydown="preventSpecialChar"
+            <input ref="input" type="number" min="1" title="current page" placeholder="1" :max="pagination.totalPages" v-model.number="validNumber" @keydown="preventSpecialChar"
                 @blur="updateInputValue" />
             OF {{ pagination.totalPages }}
         </p>
