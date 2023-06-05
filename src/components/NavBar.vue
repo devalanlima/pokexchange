@@ -9,7 +9,7 @@
             <RouterLink to="/market">Market</RouterLink>
             <RouterLink to="/about">About</RouterLink>
         </div>
-        <button>
+        <button title="connect wallet">
             <div class="btn-style1 text">Connect Wallet</div>
             <div class="btn-style1 wallet"><i class="fa-solid fa-wallet"></i></div>
             <span class="btn-style2"></span>
