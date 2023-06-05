@@ -1,9 +1,8 @@
 <template>
-    <div class="container-wrapper" @mousemove="mouseEffect" @mouseleave="resetPosition" ref="$wrapper">
-        <div class="container" ref="$container">
+    <div class="container-wrapper" @mousemove="isMobile" @mouseleave="resetPosition" ref="$wrapper">
+        <div class="container" ref="$container" :style="container">
 
-            <img v-if="haveEffect" class="effect" src="/reflexes/holo.jpg" ref="$effect"
-                alt="Holographic effect">
+            <img v-if="haveEffect" class="effect" src="/reflexes/holo.jpg" ref="$effect" alt="Holographic effect">
             <img class="grain" src="/reflexes/grain.webp" alt="Grain Effect">
             <slot></slot>
             <div class="shine" ref="$shine" :style="cardRarity">
@@ -14,6 +13,31 @@
 
 <script setup>
 import { ref } from 'vue'
+
+function isMobileDevice() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+function isMobile(event) {
+    if (isMobileDevice()) {
+        console.log('Parallax effect not supported');
+    } else {
+        const elementWrapper = $wrapper.value.getBoundingClientRect()
+        const elementShine = $shine.value.getBoundingClientRect()
+        centerX.value = elementWrapper.x + (elementWrapper.width / 2)
+        centerY.value = elementWrapper.y + (elementWrapper.height / 2)
+        cordsY.value = ((centerX.value - event.clientX) * -1) / elementWrapper.width
+        cordsX.value = (centerY.value - event.clientY) / elementWrapper.height
+        $container.value.style.transform = `rotateX(${cordsX.value * 40}deg) rotateY(${cordsY.value * 30}deg)`
+
+        shineX.value = (elementWrapper.x + (elementShine.width / 2) - event.clientX) * -1
+        shineY.value = (elementWrapper.y + (elementShine.height / 2) - event.clientY) * -1
+        $shine.value.style.transform = `translateX(${-shineX.value}px) translateY(${-shineY.value}px)  scale(1.3)`
+        if (haveEffect.value) {
+            $effect.value.style.transform = `translateX(calc(-50% - ${cordsX.value * 250}px)) translateY(calc(-50% - ${cordsY.value * 50}px)) `
+        }
+    }
+}
 
 const centerX = ref(null)
 const centerY = ref(null)
@@ -32,24 +56,6 @@ if (props.rarityCard.includes('Holo') ||
     props.rarityCard.includes('Secret') ||
     props.rarityCard.includes('Promo')) {
     haveEffect.value = true
-}
-
-const mouseEffect = (event) => {
-    const elementWrapper = $wrapper.value.getBoundingClientRect()
-    const elementShine = $shine.value.getBoundingClientRect()
-    centerX.value = elementWrapper.x + (elementWrapper.width / 2)
-    centerY.value = elementWrapper.y + (elementWrapper.height / 2)
-    cordsY.value = ((centerX.value - event.clientX) * -1) / elementWrapper.width
-    cordsX.value = (centerY.value - event.clientY) / elementWrapper.height
-    $container.value.style.transform = `rotateX(${cordsX.value * 40}deg) rotateY(${cordsY.value * 30}deg)`
-
-
-    shineX.value = (elementWrapper.x + (elementShine.width / 2) - event.clientX) * -1
-    shineY.value = (elementWrapper.y + (elementShine.height / 2) - event.clientY) * -1
-    $shine.value.style.transform = `translateX(${-shineX.value}px) translateY(${-shineY.value}px)  scale(1.3)`
-    if (haveEffect.value) {
-        $effect.value.style.transform = `translateX(calc(-50% - ${cordsX.value * 250}px)) translateY(calc(-50% - ${cordsY.value * 50}px)) `
-    }
 }
 
 let timeoutId
